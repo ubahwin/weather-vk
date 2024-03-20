@@ -1,43 +1,45 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: OpenWeatherMap One Call API
-  description: Provides access to current weather, hourly forecast, and daily forecast
+  description: >-
+    Provides access to current weather, hourly forecast, and daily forecast
     data.
   version: v1.0.0
 servers:
-- url: https://api.openweathermap.org
+  - url: https://api.openweathermap.org
 paths:
-  "/data/2.5/weather":
+  /data/2.5/weather:
     get:
-      description: Retrieve current weather, hourly forecast, and daily forecast based
-        on latitude and longitude.
+      description: >-
+        Retrieve current weather, hourly forecast, and daily forecast based on
+        latitude and longitude.
       operationId: getWeatherData
       parameters:
-      - name: lat
-        in: query
-        required: true
-        description: Latitude of the location.
-        schema:
-          type: number
-      - name: lon
-        in: query
-        required: true
-        description: Longitude of the location.
-        schema:
-          type: number
-      - name: appid
-        in: query
-        required: true
-        description: API key for authentication.
-        schema:
-          type: string
+        - name: lat
+          in: query
+          required: true
+          description: Latitude of the location.
+          schema:
+            type: number
+        - name: lon
+          in: query
+          required: true
+          description: Longitude of the location.
+          schema:
+            type: number
+        - name: appid
+          in: query
+          required: true
+          description: API key for authentication.
+          schema:
+            type: string
       responses:
         '200':
           description: Successful response with weather data.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/WeatherResponse"
+                $ref: '#/components/schemas/WeatherResponse'
         '401':
           description: Unauthorized due to missing or invalid API key.
 components:
@@ -226,8 +228,3 @@ components:
                         type: number
                       direction:
                         type: integer
-securitySchemes:
-  apiKeyAuth:
-    type: apiKey
-    in: query
-    name: appid

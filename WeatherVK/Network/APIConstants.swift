@@ -2,7 +2,7 @@ import Foundation
 
 final class APIConstants {
     static let basedURL: String = "https://api.openweathermap.org"
-    static let token: String = "8db9482d599244c999864084749db4b9"
+    static let token: String = "<token>"
 }
 
 enum HTTPHeaderField: String {

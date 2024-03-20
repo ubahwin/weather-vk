@@ -23,6 +23,6 @@ struct OpenWeatherWebRepository: IWeatherWebRepository {
 
 struct StubWeatherWebRepository: IWeatherWebRepository {
     func loadWeather(coordinates: CLLocationCoordinate2D) -> AnyPublisher<Weather, NetworkRequestError> {
-        Just<Weather>.withErrorType(Weather(temperature: 123), NetworkRequestError.self)
+        Just<Weather>.withErrorType(.stub, NetworkRequestError.self)
     }
 }

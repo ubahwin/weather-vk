@@ -27,6 +27,7 @@ struct WeatherReducer: IWeatherReducer {
             return
         }
 
+        observingPhoneRotate()
         loadWeather(from: coordinates)
     }
 
@@ -50,6 +51,11 @@ struct WeatherReducer: IWeatherReducer {
                 self.loadWeather(from: coordinates)
             }
             .store(in: cancelBag)
+    }
+
+    private func observingPhoneRotate() {
+        locationManager.phoneRotateDegrees
+            .assign(to: &appState.$phoneRotateDegrees)
     }
 
     // MARK: Utility

@@ -6,7 +6,12 @@ struct MainView: View {
 
     var body: some View {
         ZStack {
-            Color.blue.ignoresSafeArea()
+            LinearGradient(
+                gradient: .init(colors: [.blue, .white]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
 
             ZStack {
                 VStack {
@@ -24,12 +29,34 @@ struct MainView: View {
                 }
             }
 
-            Cloud(width: 140, height: 80) {
-                Text("\(appState.currentWeather?.temperature.description ?? "") °C")
+            VStack {
+                Cloud(width: 120, height: 80) {
+                    Text("\(appState.currentWeather?.temperature.description ?? "") °C")
+                        .font(.title)
+                        .bold()
+                }
+                Cloud(width: 100, height: 70) {
+                    HStack {
+                        Image(systemName: "arrow.up")
+                            .rotationEffect(.degrees(
+                                (appState.currentWeather?.windDirectDegrees ?? 0) - appState.phoneRotateDegrees
+                            ))
+                        Text("\(appState.currentWeather?.windSpeed.description ?? "") m/s")
+                    }
+                }
+                Cloud(width: 100, height: 70) {
+                    HStack {
+                        Image(systemName: "cloud")
+                        Text("\(appState.currentWeather?.clouds.description ?? "") %")
+                    }
+                }
             }
         }
         .onAppear {
             weatherReducer.loadWeather()
+        }
+        .onReceive(appState.$phoneRotateDegrees) { rot in
+            print(rot)
         }
     }
 }
@@ -39,5 +66,6 @@ struct Preview: PreviewProvider {
         MainView()
             .environment(\.weatherReducer, WeatherReducer.stub)
             .environmentObject(AppState())
+            .environment(\.colorScheme, .light)
     }
 }

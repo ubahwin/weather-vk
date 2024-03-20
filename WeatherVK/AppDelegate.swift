@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainView = MainView()
             .environment(\.weatherReducer, weatherReducer)
             .environmentObject(appState)
+            .environment(\.colorScheme, .light)
 
         let main = UIHostingController(rootView: mainView)
         main.tabBarItem.title = "Main"
@@ -29,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         cities.tabBarItem.title = "Cities"
         cities.tabBarItem.image = UIImage(systemName: "house")
 
+        UITabBar.appearance().barTintColor = .white
+
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([main, cities], animated: true)
         tabBarController.tabBar.tintColor = .cyan
@@ -37,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow()
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
+
         self.window = window
 
         return true

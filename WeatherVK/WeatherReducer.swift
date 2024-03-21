@@ -2,6 +2,9 @@ import MapKit
 
 protocol IWeatherReducer {
     func loadWeather()
+    func loadForecast()
+
+    func sinkToData(_ reloadData: @escaping () -> Void)
 }
 
 struct WeatherReducer: IWeatherReducer {
@@ -21,6 +24,15 @@ struct WeatherReducer: IWeatherReducer {
         self.locationManager = locationManager
     }
 
+    func loadForecast() {
+        guard let coordinates = appState.userCoordinates else {
+            getUserLocation()
+            return
+        }
+
+        loadForecast(from: coordinates)
+    }
+
     func loadWeather() {
         guard let coordinates = appState.userCoordinates else {
             getUserLocation()
@@ -31,6 +43,26 @@ struct WeatherReducer: IWeatherReducer {
         loadWeather(from: coordinates)
     }
 
+    func sinkToData(_ reloadData: @escaping () -> Void) {
+        appState.$forecast
+            .sink { _ in
+                reloadData()
+            }
+            .store(in: cancelBag)
+    }
+
+    private func loadForecast(from coordinates: CLLocationCoordinate2D) {
+        weatherWebRepository.loadForecast(coordinates: coordinates)
+            .sink(receiveCompletion: { completion in
+                if case let .failure(error) = completion {
+                    Log.error(error.localizedDescription)
+                }
+            }, receiveValue: { forecast in
+                appState.forecast = forecast
+            })
+            .store(in: cancelBag)
+    }
+
     private func loadWeather(from coordinates: CLLocationCoordinate2D) {
         weatherWebRepository.loadWeather(coordinates: coordinates)
             .sink(receiveCompletion: { completion in
@@ -38,7 +70,6 @@ struct WeatherReducer: IWeatherReducer {
                     Log.error(error.localizedDescription)
                 }
             }, receiveValue: { weather in
-                Log.info("\(weather)")
                 appState.currentWeather = weather
             })
             .store(in: cancelBag)
@@ -50,7 +81,7 @@ struct WeatherReducer: IWeatherReducer {
                 appState.userCoordinates = coordinates
                 self.loadWeather(from: coordinates)
             }
-            .store(in: cancelBag)
+            .cancel()
     }
 
     private func observingPhoneRotate() {

@@ -23,7 +23,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ILocationManager {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            Log.info("\(location.coordinate)")
+            Log.info("Координаты пойманы: \(location.coordinate)")
             userLocation.send(location.coordinate)
             locationManager.stopUpdatingLocation()
         }
@@ -35,7 +35,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ILocationManager {
     ) {
         let degrees = newHeading.trueHeading
         phoneRotateDegrees.send(degrees)
-        print(degrees)
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

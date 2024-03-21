@@ -18,7 +18,10 @@ struct MainView: View {
                     HStack {
                         Spacer()
                         Cloud(width: 50, height: 50) {
-                            Button(action: weatherReducer.loadWeather, label: {
+                            Button(action: {
+                                weatherReducer.loadWeather()
+                                weatherReducer.loadForecast()
+                            }, label: {
                                 Image(systemName: "arrow.clockwise")
                                     .foregroundStyle(.black)
                             })
@@ -54,9 +57,6 @@ struct MainView: View {
         }
         .onAppear {
             weatherReducer.loadWeather()
-        }
-        .onReceive(appState.$phoneRotateDegrees) { rot in
-            print(rot)
         }
     }
 }

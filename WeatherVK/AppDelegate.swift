@@ -21,20 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .environmentObject(appState)
             .environment(\.colorScheme, .light)
 
+        let forecastView = ForecastTable(appState: appState, weatherReducer: weatherReducer)
+
         let main = UIHostingController(rootView: mainView)
         main.tabBarItem.title = "Main"
         main.tabBarItem.image = UIImage(systemName: "cloud.sun")
-        main.navigationItem.title = "Weather"
 
-        let cities = UINavigationController(rootViewController: CitiesTable())
-        cities.tabBarItem.title = "Cities"
-        cities.tabBarItem.image = UIImage(systemName: "house")
+        let forecast = UINavigationController(rootViewController: forecastView)
+        forecast.tabBarItem.title = "Forecast"
+        forecast.tabBarItem.image = UIImage(systemName: "table")
 
         UITabBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().barTintColor = .white
+        UITableView.appearance().tintColor = .white
 
         let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([main, cities], animated: true)
-        tabBarController.tabBar.tintColor = .cyan
+        tabBarController.setViewControllers([main, forecast], animated: true)
+        tabBarController.tabBar.tintColor = .blue
         tabBarController.tabBar.unselectedItemTintColor = .black
 
         let window = UIWindow()

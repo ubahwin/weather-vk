@@ -7,7 +7,7 @@
 ![](https://img.shields.io/badge/iOS-16%2B-green?logo=apple)
 ![](https://img.shields.io/badge/Swift%205.9-FA7343?style=flat&logo=swift&logoColor=white)
 
-Weather имеет расширяемую реактивную Redux-like архитектуру
+Приложение имеет расширяемую реактивную _Redux-like_ архитектуру, я применяю верстку как на _UIKit_, так и на _SwiftUI_. Для обеспечения реактивности различных делегатов, таких как из _CoreLocation_ и тд, я использую _Combine_.
 
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 24px; row-gap: 20px;">
   <img src="img/1.png" style="width:200px;">
@@ -20,7 +20,13 @@ Weather имеет расширяемую реактивную Redux-like арх
 
 ## Установка
 
-Чтобы получать данные от OpenWeather API введите токен в ..., архитектура также позволяет заменить `OpenWeatherWebRepository` на свой компонент, удовлетворяющий `WebRepository`, например `StubWeatherWebRepository`
+Чтобы получать данные от OpenWeather API введите токен в **Network/APIConstants**:
+
+```swift
+static let token: String = "<appid>"
+```
+
+Архитектура также позволяет заменить `OpenWeatherWebRepository` на свой компонент, удовлетворяющий `WebRepository`, например `StubWeatherWebRepository`
 
 ## Структура проекта
 

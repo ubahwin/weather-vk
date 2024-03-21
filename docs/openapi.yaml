@@ -39,192 +39,216 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WeatherResponse'
+                type: object
+                properties:
+                  coord:
+                    type: object
+                    properties:
+                      lon:
+                        type: number
+                      lat:
+                        type: number
+                  weather:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        main:
+                          type: string
+                        description:
+                          type: string
+                        icon:
+                          type: string
+                  base:
+                    type: string
+                  main:
+                    type: object
+                    properties:
+                      temp:
+                        type: number
+                      feels_like:
+                        type: number
+                      temp_min:
+                        type: number
+                      temp_max:
+                        type: number
+                      pressure:
+                        type: integer
+                      humidity:
+                        type: integer
+                  visibility:
+                    type: integer
+                  wind:
+                    type: object
+                    properties:
+                      speed:
+                        type: number
+                      deg:
+                        type: number
+                  clouds:
+                    type: object
+                    properties:
+                      all:
+                        type: integer
+                  dt:
+                    type: integer
+                  sys:
+                    type: object
+                    properties:
+                      type:
+                        type: integer
+                      id:
+                        type: integer
+                      country:
+                        type: string
+                      sunrise:
+                        type: integer
+                      sunset:
+                        type: integer
+                  timezone:
+                    type: integer
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  cod:
+                    type: integer
         '401':
           description: Unauthorized due to missing or invalid API key.
-components:
-  schemas:
-    WeatherResponse:
-      type: object
-      properties:
-        current:
-          type: object
-          properties:
-            lat:
-              type: number
-            lon:
-              type: number
-            tz:
-              type: string
-            date:
-              type: string
-              format: date
-            units:
-              type: string
-            cloud_cover:
-              type: object
-              properties:
-                afternoon:
-                  type: integer
-            humidity:
-              type: object
-              properties:
-                afternoon:
-                  type: integer
-            precipitation:
-              type: object
-              properties:
-                total:
-                  type: integer
-            temperature:
-              type: object
-              properties:
-                min:
-                  type: number
-                max:
-                  type: number
-                afternoon:
-                  type: number
-                night:
-                  type: number
-                evening:
-                  type: number
-                morning:
-                  type: number
-            pressure:
-              type: object
-              properties:
-                afternoon:
-                  type: integer
-            wind:
-              type: object
-              properties:
-                max:
-                  type: object
-                  properties:
-                    speed:
-                      type: number
-                    direction:
-                      type: integer
-        hourly:
-          type: array
-          items:
-            type: object
-            properties:
-              lat:
-                type: number
-              lon:
-                type: number
-              tz:
-                type: string
-              date:
-                type: string
-                format: date
-              units:
-                type: string
-              cloud_cover:
+  /data/2.5/forecast:
+    get:
+      description: >-
+        Retrieve hourly weather forecast based on latitude and longitude.
+      operationId: getWeatherForecast
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          description: Latitude of the location.
+          schema:
+            type: number
+        - name: lon
+          in: query
+          required: true
+          description: Longitude of the location.
+          schema:
+            type: number
+        - name: appid
+          in: query
+          required: true
+          description: API key for authentication.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with weather forecast data.
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  afternoon:
+                  cod:
+                    type: string
+                  message:
+                    type: number
+                  cnt:
                     type: integer
-              humidity:
-                type: object
-                properties:
-                  afternoon:
-                    type: integer
-              precipitation:
-                type: object
-                properties:
-                  total:
-                    type: integer
-              temperature:
-                type: object
-                properties:
-                  min:
-                    type: number
-                  max:
-                    type: number
-                  afternoon:
-                    type: number
-                  night:
-                    type: number
-                  evening:
-                    type: number
-                  morning:
-                    type: number
-              pressure:
-                type: object
-                properties:
-                  afternoon:
-                    type: integer
-              wind:
-                type: object
-                properties:
-                  max:
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        dt:
+                          type: integer
+                        main:
+                          type: object
+                          properties:
+                            temp:
+                              type: number
+                            feels_like:
+                              type: number
+                            temp_min:
+                              type: number
+                            temp_max:
+                              type: number
+                            pressure:
+                              type: integer
+                            sea_level:
+                              type: integer
+                            grnd_level:
+                              type: integer
+                            humidity:
+                              type: integer
+                            temp_kf:
+                              type: number
+                        weather:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              main:
+                                type: string
+                              description:
+                                type: string
+                              icon:
+                                type: string
+                        clouds:
+                          type: object
+                          properties:
+                            all:
+                              type: integer
+                        wind:
+                          type: object
+                          properties:
+                            speed:
+                              type: number
+                            deg:
+                              type: number
+                            gust:
+                              type: number
+                        visibility:
+                          type: integer
+                        pop:
+                          type: number
+                        rain:
+                          type: object
+                          properties:
+                            3h:
+                              type: number
+                        sys:
+                          type: object
+                          properties:
+                            pod:
+                              type: string
+                        dt_txt:
+                          type: string
+                  city:
                     type: object
                     properties:
-                      speed:
-                        type: number
-                      direction:
+                      id:
                         type: integer
-        daily:
-          type: array
-          items:
-            type: object
-            properties:
-              lat:
-                type: number
-              lon:
-                type: number
-              tz:
-                type: string
-              date:
-                type: string
-                format: date
-              units:
-                type: string
-              cloud_cover:
-                type: object
-                properties:
-                  afternoon:
-                    type: integer
-              humidity:
-                type: object
-                properties:
-                  afternoon:
-                    type: integer
-              precipitation:
-                type: object
-                properties:
-                  total:
-                    type: integer
-              temperature:
-                type: object
-                properties:
-                  min:
-                    type: number
-                  max:
-                    type: number
-                  afternoon:
-                    type: number
-                  night:
-                    type: number
-                  evening:
-                    type: number
-                  morning:
-                    type: number
-              pressure:
-                type: object
-                properties:
-                  afternoon:
-                    type: integer
-              wind:
-                type: object
-                properties:
-                  max:
-                    type: object
-                    properties:
-                      speed:
-                        type: number
-                      direction:
+                      name:
+                        type: string
+                      coord:
+                        type: object
+                        properties:
+                          lat:
+                            type: number
+                          lon:
+                            type: number
+                      country:
+                        type: string
+                      population:
                         type: integer
+                      timezone:
+                        type: integer
+                      sunrise:
+                        type: integer
+                      sunset:
+                        type: integer
+        '401':
+          description: Unauthorized due to missing or invalid API key.

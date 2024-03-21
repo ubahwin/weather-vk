@@ -2,3 +2,5 @@ disabled_rules:
   - todo
   - multiple_closures_with_trailing_closure
   - nesting
+excluded:
+  - WeatherVK/Network/DTO/Response

@@ -1,6 +1,6 @@
 import UIKit
 
-class CitiesTable: UITableViewController {
+class ForecastTable: UITableViewController {
     override func viewDidLoad() {
 
     }

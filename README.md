@@ -7,12 +7,18 @@
 ![](https://img.shields.io/badge/iOS-16%2B-green?logo=apple)
 ![](https://img.shields.io/badge/Swift%205.9-FA7343?style=flat&logo=swift&logoColor=white)
 
-Приложение имеет расширяемую реактивную _Redux-like_ архитектуру, я применяю верстку как на **UIKit**, так и на **SwiftUI**. Для обеспечения реактивности различных делегатов, таких как из _CoreLocation_ и тд, я использую **Combine**. Сетевой слой написан с использованием Combine.
+Приложение имеет расширяемую _Redux-like_ архитектуру, я применяю верстку как на **UIKit**, так и на **SwiftUI**. Для обеспечения реактивности различных делегатов, таких как из _CoreLocation_ и тд, я использую **Combine**. Сетевой слой написан с использованием **Combine**. Тесты присутствуют.
 
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 24px; row-gap: 20px;">
-  <img src="img/1.png" style="width:200px;">
-  <img src="img/2.png" style="width:200px;">
+  <img src="img/1.jpeg" style="width:200px;">
+  <img src="img/2.jpeg" style="width:200px;">
 </div>
+
+## Архитектура
+
+![](./img/architecture.png)
+
+Приложение поделено на слои-модули, где общение происходит по протоколам
 
 ## git
 
@@ -37,11 +43,11 @@ static let token: String = "<appid>"
 ```
 WeatherVK
 │
-├── AppDelegate   <- @main
+├── AppDelegate     <- @main
 │
 ├── Network
 │   ├── DTO
-│   │   └── ...   <- Response types and mapping
+│   │   └── ...     <- Response types and mapping
 │   ├── APIClient
 │   ├── APIRouter
 │   └── ...
@@ -56,13 +62,14 @@ WeatherVK
 ├── Model
 │   └── ...
 │
-│
 ├── WeatherReducer
-├── AppState      <- Single Source of Trust
-├── Environment   <- Bind for SwiftUI
+├── AppState        <- Single Source of Trust
+├── Environment     <- Bind for SwiftUI
 │
-├── Docs          <- openapi.yaml
-└── ...           <- Resources and utility
+├── LocationManager <- Location detect
+│
+├── Docs            <- openapi.yaml
+└── ...             <- Resources and utility
 ```
 
 ## Технологии и инструменты

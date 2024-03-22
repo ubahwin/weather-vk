@@ -33,12 +33,14 @@ struct MainView: View {
             }
 
             VStack {
-                Cloud(width: 120, height: 80) {
+                Cloud(width: 120, height: 80, moveRetio: 8) {
                     Text("\(appState.currentWeather?.temperature.description ?? "") °C")
                         .font(.title)
                         .bold()
                 }
-                Cloud(width: 100, height: 70) {
+                .padding(20)
+
+                Cloud(width: 100, height: 70, moveRetio: 10) {
                     HStack {
                         Image(systemName: "arrow.up")
                             .rotationEffect(.degrees(
@@ -47,7 +49,8 @@ struct MainView: View {
                         Text("\(appState.currentWeather?.windSpeed.description ?? "") m/s")
                     }
                 }
-                Cloud(width: 100, height: 70) {
+
+                Cloud(width: 100, height: 70, moveRetio: 10) {
                     HStack {
                         Image(systemName: "cloud")
                         Text("\(appState.currentWeather?.clouds.description ?? "") %")

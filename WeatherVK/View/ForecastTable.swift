@@ -11,8 +11,6 @@ class ForecastTable: UITableViewController {
         self.appState = appState
         self.weatherReducer = weatherReducer
 
-        weatherReducer.loadForecast()
-
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -23,22 +21,34 @@ class ForecastTable: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(ForcastWeatherCell.self, forCellReuseIdentifier: ForcastWeatherCell.identifier)
 
         weatherReducer.sinkToData(tableView.reloadData)
+        weatherReducer.loadForecast()
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    override func numberOfSections(in tableView: UITableView) -> Int { 1 }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appState.forecast?.count ?? 0
+        appState.forecast?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = appState.forecast?[indexPath.row].temperature.description
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: ForcastWeatherCell.identifier, for: indexPath)
+
+        guard let cell = cell as? ForcastWeatherCell else {
+            fatalError("error in table view")
+        }
+
+        guard
+            let dayweek = self.appState.forecast?[indexPath.row].dayweek,
+            let weather = self.appState.forecast?[indexPath.row].wearher
+        else { return ForcastWeatherCell() }
+
+        cell.backgroundColor = .white
+        cell.configure(dayweek: dayweek, weather: weather)
+        cell.isUserInteractionEnabled = false
+
         return cell
     }
 }

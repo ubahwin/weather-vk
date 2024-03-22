@@ -5,7 +5,7 @@ struct DirtyForecast {
 }
 
 struct DirtyWeather {
-    var timeStamb: TimeInterval
+    var timestamp: TimeInterval
     var minTemp: Int
     var maxTemp: Int
     var windSpeed: Double

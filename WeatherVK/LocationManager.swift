@@ -30,22 +30,24 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ILocationManager {
             guard
                 let placemark = placemarks?.first,
                 let city = placemark.locality
-            else { return }
+            else {
+                return
+            }
 
             self.cityName.send(city)
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            let coordinate = location.coordinate
-
-            Log.info("Координаты пойманы: \(coordinate)")
-            userLocation.send(coordinate)
-            getCityName(from: coordinate)
-
-            locationManager.stopUpdatingLocation()
+        guard let coordinate = locations.last?.coordinate else {
+            return
         }
+
+        Log.info("Координаты пойманы: \(coordinate)")
+        userLocation.send(coordinate)
+        getCityName(from: coordinate)
+
+        locationManager.stopUpdatingLocation()
     }
 
     func locationManager(

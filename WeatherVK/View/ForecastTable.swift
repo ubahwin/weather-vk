@@ -42,7 +42,7 @@ class ForecastTable: UITableViewController {
 
         guard
             let dayweek = self.appState.forecast?[indexPath.row].dayweek,
-            let weather = self.appState.forecast?[indexPath.row].wearher
+            let weather = self.appState.forecast?[indexPath.row].weather
         else { return ForcastWeatherCell() }
 
         cell.backgroundColor = .white

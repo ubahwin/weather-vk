@@ -2,11 +2,11 @@ import Foundation
 
 struct Forecast {
     var dayweek: DayWeek
-    var wearher: Weather
+    var weather: Weather
 }
 
 extension Forecast {
     static var stub: Self {
-        Self(dayweek: .friday, wearher: .stub)
+        Self(dayweek: .friday, weather: .stub)
     }
 }

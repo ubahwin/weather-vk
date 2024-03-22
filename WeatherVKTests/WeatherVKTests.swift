@@ -43,42 +43,42 @@ final class WeatherVKTests: XCTestCase {
 
         let weatherList = [
             DirtyWeather(
-                timeStamb: timeIntMonday,
+                timestamp: timeIntMonday,
                 minTemp: 1,
                 maxTemp: 1,
                 windSpeed: 1,
                 clouds: 1
             ),
             DirtyWeather(
-                timeStamb: timeIntMonday,
+                timestamp: timeIntMonday,
                 minTemp: 1,
                 maxTemp: 1,
                 windSpeed: 1,
                 clouds: 1
             ),
             DirtyWeather(
-                timeStamb: timeIntMonday,
+                timestamp: timeIntMonday,
                 minTemp: 1,
                 maxTemp: 1,
                 windSpeed: 1,
                 clouds: 1
             ),
             DirtyWeather(
-                timeStamb: timeIntMonday,
+                timestamp: timeIntMonday,
                 minTemp: 1,
                 maxTemp: 1,
                 windSpeed: 1,
                 clouds: 1
             ),
             DirtyWeather(
-                timeStamb: timeIntThursday,
+                timestamp: timeIntThursday,
                 minTemp: 2,
                 maxTemp: 2,
                 windSpeed: 2,
                 clouds: 2
             ),
             DirtyWeather(
-                timeStamb: timeIntThursday,
+                timestamp: timeIntThursday,
                 minTemp: 2,
                 maxTemp: 2,
                 windSpeed: 2,
@@ -92,7 +92,7 @@ final class WeatherVKTests: XCTestCase {
             [
                 Forecast(
                     dayweek: .monday,
-                    wearher: Weather(
+                    weather: Weather(
                         temperature: 0,
                         minTemp: 1,
                         maxTemp: 1,
@@ -103,7 +103,7 @@ final class WeatherVKTests: XCTestCase {
                 ),
                 Forecast(
                     dayweek: .thursday,
-                    wearher: Weather(
+                    weather: Weather(
                         temperature: 0,
                         minTemp: 2,
                         maxTemp: 2,
@@ -118,42 +118,42 @@ final class WeatherVKTests: XCTestCase {
 
     let createAverageWeatherList1 = [
         DirtyWeather(
-            timeStamb: 1711324800,
+            timestamp: 1711324800,
             minTemp: 7,
             maxTemp: 4,
             windSpeed: 1,
             clouds: 0
         ),
         DirtyWeather(
-            timeStamb: 1711324800,
+            timestamp: 1711324800,
             minTemp: 2,
             maxTemp: 9,
             windSpeed: 2,
             clouds: 0
         ),
         DirtyWeather(
-            timeStamb: 1711324800,
+            timestamp: 1711324800,
             minTemp: 3,
             maxTemp: 2,
             windSpeed: 3,
             clouds: 0
         ),
         DirtyWeather(
-            timeStamb: 1711324800,
+            timestamp: 1711324800,
             minTemp: -4,
             maxTemp: -1,
             windSpeed: 4,
             clouds: 100
         ),
         DirtyWeather(
-            timeStamb: 1711324800,
+            timestamp: 1711324800,
             minTemp: 4,
             maxTemp: 10,
             windSpeed: 5,
             clouds: 100
         ),
         DirtyWeather(
-            timeStamb: 1711324800,
+            timestamp: 1711324800,
             minTemp: 5,
             maxTemp: 1,
             windSpeed: 9,
@@ -174,12 +174,11 @@ final class WeatherVKTests: XCTestCase {
             )
         )
     }
-
 }
 
 extension Forecast: Equatable {
     public static func == (lhs: WeatherVK.Forecast, rhs: WeatherVK.Forecast) -> Bool {
-        lhs.dayweek == rhs.dayweek && lhs.wearher == rhs.wearher
+        lhs.dayweek == rhs.dayweek && lhs.weather == rhs.weather
     }
 }
 

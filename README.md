@@ -7,12 +7,16 @@
 ![](https://img.shields.io/badge/iOS-16%2B-green?logo=apple)
 ![](https://img.shields.io/badge/Swift%205.9-FA7343?style=flat&logo=swift&logoColor=white)
 
-Приложение имеет расширяемую реактивную _Redux-like_ архитектуру, я применяю верстку как на _UIKit_, так и на _SwiftUI_. Для обеспечения реактивности различных делегатов, таких как из _CoreLocation_ и тд, я использую _Combine_.
+Приложение имеет расширяемую реактивную _Redux-like_ архитектуру, я применяю верстку как на **UIKit**, так и на **SwiftUI**. Для обеспечения реактивности различных делегатов, таких как из _CoreLocation_ и тд, я использую **Combine**. Сетевой слой написан с использованием Combine.
 
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 24px; row-gap: 20px;">
   <img src="img/1.png" style="width:200px;">
   <img src="img/2.png" style="width:200px;">
 </div>
+
+## git
+
+Была использована стандартная ветвная стратегия, аналогичная принятой практике во многих IT-компаниях. Ветвь `dev` служила основным местом для разработки функциональности. Это позволяло поддерживать чистоту и стабильность основной ветви `main`.
 
 ## OpenAPI
 
@@ -26,7 +30,7 @@
 static let token: String = "<appid>"
 ```
 
-Архитектура также позволяет заменить `OpenWeatherWebRepository` на свой компонент, удовлетворяющий `WebRepository`, например `StubWeatherWebRepository`
+Архитектура также позволяет заменить `OpenWeatherWebRepository` на свой компонент, реализующий `WebRepository`, например `StubWeatherWebRepository`
 
 ## Структура проекта
 
@@ -66,7 +70,7 @@ WeatherVK
 - [UIKit]()
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
 - [Combine]()
-- [Сетевой слой](https://github.com/sajjadsarkoobi/CombineNetworking---SwiftUI)
+- [Сетевой слой](https://danielbernal.co/writing-a-networking-library-with-combine-codable-and-swift-5/)
 - [OpenWeather API](https://openweathermap.org)
 - [CoreLocation]()
 - [Postman](https://www.postman.com/)

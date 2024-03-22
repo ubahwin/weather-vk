@@ -12,6 +12,8 @@ struct WeatherReducer: IWeatherReducer {
     private let weatherWebRepository: IWeatherWebRepository
     private let locationManager: ILocationManager
 
+    private let forecastFormatter = ForecastFormatter()
+
     private let cancelBag = CancelBag()
 
     init(
@@ -53,6 +55,9 @@ struct WeatherReducer: IWeatherReducer {
 
     private func loadForecast(from coordinates: CLLocationCoordinate2D) {
         weatherWebRepository.loadForecast(coordinates: coordinates)
+            .map { dirtyForecast in
+                forecastFormatter.clean(dirtyForecast: dirtyForecast)
+            }
             .sink(receiveCompletion: { completion in
                 if case let .failure(error) = completion {
                     Log.error(error.localizedDescription)

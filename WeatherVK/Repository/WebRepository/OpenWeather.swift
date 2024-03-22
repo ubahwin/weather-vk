@@ -3,7 +3,7 @@ import MapKit
 
 protocol IWeatherWebRepository {
     func loadWeather(coordinates: CLLocationCoordinate2D) -> AnyPublisher<Weather, NetworkRequestError>
-    func loadForecast(coordinates: CLLocationCoordinate2D) -> AnyPublisher<Forecast, NetworkRequestError>
+    func loadForecast(coordinates: CLLocationCoordinate2D) -> AnyPublisher<DirtyForecast, NetworkRequestError>
 }
 
 struct OpenWeatherWebRepository: IWeatherWebRepository {
@@ -21,7 +21,7 @@ struct OpenWeatherWebRepository: IWeatherWebRepository {
         .eraseToAnyPublisher()
     }
 
-    func loadForecast(coordinates: CLLocationCoordinate2D) -> AnyPublisher<Forecast, NetworkRequestError> {
+    func loadForecast(coordinates: CLLocationCoordinate2D) -> AnyPublisher<DirtyForecast, NetworkRequestError> {
         APIClient.dispatch(
             APIRouter.GetFiveDayForecastResponse(queryParams: APIParameters.FiveDaysForecastParams(
                 lat: coordinates.latitude,
@@ -30,16 +30,15 @@ struct OpenWeatherWebRepository: IWeatherWebRepository {
             ))
         )
         .map { forecastResponse in
-            return Mapper.currentForecastToModel(forecastResponse)
+            return Mapper.forecastResponseToDirtyModel(forecastResponse)
         }
         .eraseToAnyPublisher()
-
     }
 }
 
 struct StubWeatherWebRepository: IWeatherWebRepository {
-    func loadForecast(coordinates: CLLocationCoordinate2D) -> AnyPublisher<Forecast, NetworkRequestError> {
-        Just<Forecast>.withErrorType([], NetworkRequestError.self)
+    func loadForecast(coordinates: CLLocationCoordinate2D) -> AnyPublisher<DirtyForecast, NetworkRequestError> {
+        Just<DirtyForecast>.withErrorType(DirtyForecast(weatherList: []), NetworkRequestError.self)
     }
 
     func loadWeather(coordinates: CLLocationCoordinate2D) -> AnyPublisher<Weather, NetworkRequestError> {

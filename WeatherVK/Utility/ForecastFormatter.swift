@@ -15,48 +15,37 @@ class ForecastFormatter {
         var rightDayWeek: DayWeek = .monday
 
         for rightIndex in 1..<list.count {
-            leftDayWeek = calcDayWeek(utc: list[leftIndex].timeStamb)
-            rightDayWeek = calcDayWeek(utc: list[rightIndex].timeStamb)
+            leftDayWeek = calcDayWeek(utc: list[leftIndex].timestamp)
+            rightDayWeek = calcDayWeek(utc: list[rightIndex].timestamp)
 
-            if leftDayWeek != rightDayWeek {
-                let dayWeekList = Array(list[leftIndex..<rightIndex])
-                let weather: Weather = createAverageWeather(list: dayWeekList)
-
-                forecasts.append(Forecast(
-                    dayweek: calcDayWeek(utc: list[leftIndex].timeStamb),
-                    wearher: weather
-                ))
-
-                leftIndex = rightIndex
+            if leftDayWeek == rightDayWeek && rightIndex != list.count - 1 {
+                continue
             }
-        }
 
-        if forecasts.last?.dayweek != leftDayWeek {
-            let dayWeekList = Array(list[leftIndex..<list.count])
-            let weather: Weather = createAverageWeather(list: dayWeekList)
+            let forecast = Forecast(
+                dayweek: calcDayWeek(utc: list[leftIndex].timestamp),
+                weather: createAverageWeather(list: Array(list[leftIndex..<rightIndex]))
+            )
 
-            forecasts.append(Forecast(
-                dayweek: calcDayWeek(utc: list[leftIndex].timeStamb),
-                wearher: weather
-            ))
+            forecasts.append(forecast)
+
+            leftIndex = rightIndex
         }
 
         return forecasts
     }
 
     func createAverageWeather(list: [DirtyWeather]) -> Weather {
-        var minTemp = Int.max
-        var maxTemp = Int.min
-        var windSpeed: Double = 0
-        var clouds = 0
+        var minTemp = list[0].minTemp
+        var maxTemp = list[0].maxTemp
 
-        for weather in list {
-            minTemp = min(minTemp, Int(weather.minTemp))
-            maxTemp = max(maxTemp, Int(weather.maxTemp))
+        for index in 1..<list.count {
+            minTemp = min(minTemp, list[index].minTemp)
+            maxTemp = max(maxTemp, list[index].maxTemp)
         }
 
-        windSpeed = list.reduce(0) { $0 + ($1.windSpeed) } / Double(list.count)
-        clouds = list.reduce(0) { $0 + ($1.clouds) } / list.count
+        let windSpeed = list.reduce(0) { $0 + ($1.windSpeed) } / Double(list.count)
+        let clouds = list.reduce(0) { $0 + ($1.clouds) } / list.count
 
         return Weather(
             temperature: 0,

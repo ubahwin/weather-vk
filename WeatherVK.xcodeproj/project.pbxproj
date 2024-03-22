@@ -42,7 +42,22 @@
 		B7CCF69A2BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerRain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCF68B2BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerRain.swift */; };
 		B7CCF69B2BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerSys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCF68C2BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerSys.swift */; };
 		B7CCF69D2BAC1DE400F57719 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCF69C2BAC1DE400F57719 /* Forecast.swift */; };
+		B7CCF69F2BAC34E200F57719 /* ForcastWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCF69E2BAC34E200F57719 /* ForcastWeatherCell.swift */; };
+		B7CCF6A72BAC466800F57719 /* WeatherVKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCF6A62BAC466800F57719 /* WeatherVKTests.swift */; };
+		B7CCF6AE2BAC46EF00F57719 /* DayWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCF6AD2BAC46EF00F57719 /* DayWeek.swift */; };
+		B7F764312BAC4DAF0040D5DC /* ForecastFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F764302BAC4DAF0040D5DC /* ForecastFormatter.swift */; };
+		B7F764332BAC574C0040D5DC /* DirtyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F764322BAC574C0040D5DC /* DirtyForecast.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B7CCF6A82BAC466800F57719 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B715F00E2BAAB776009F65EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B715F0152BAAB776009F65EC;
+			remoteInfo = WeatherVK;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B715F0162BAAB776009F65EC /* WeatherVK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherVK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,10 +97,23 @@
 		B7CCF68B2BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerRain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetWeatherForecast200ResponseListInnerRain.swift; sourceTree = "<group>"; };
 		B7CCF68C2BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerSys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetWeatherForecast200ResponseListInnerSys.swift; sourceTree = "<group>"; };
 		B7CCF69C2BAC1DE400F57719 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		B7CCF69E2BAC34E200F57719 /* ForcastWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForcastWeatherCell.swift; sourceTree = "<group>"; };
+		B7CCF6A42BAC466800F57719 /* WeatherVKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherVKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7CCF6A62BAC466800F57719 /* WeatherVKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherVKTests.swift; sourceTree = "<group>"; };
+		B7CCF6AD2BAC46EF00F57719 /* DayWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeek.swift; sourceTree = "<group>"; };
+		B7F764302BAC4DAF0040D5DC /* ForecastFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastFormatter.swift; sourceTree = "<group>"; };
+		B7F764322BAC574C0040D5DC /* DirtyForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirtyForecast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B715F0132BAAB776009F65EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7CCF6A12BAC466800F57719 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -99,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				B715F0182BAAB776009F65EC /* WeatherVK */,
+				B7CCF6A52BAC466800F57719 /* WeatherVKTests */,
 				B715F0172BAAB776009F65EC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				B715F0162BAAB776009F65EC /* WeatherVK.app */,
+				B7CCF6A42BAC466800F57719 /* WeatherVKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +182,8 @@
 			children = (
 				B715F02C2BAAB7BA009F65EC /* Weather.swift */,
 				B7CCF69C2BAC1DE400F57719 /* Forecast.swift */,
+				B7CCF6AD2BAC46EF00F57719 /* DayWeek.swift */,
+				B7F764322BAC574C0040D5DC /* DirtyForecast.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -176,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				B715F0352BAAB7BA009F65EC /* Cloud.swift */,
+				B7CCF69E2BAC34E200F57719 /* ForcastWeatherCell.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -193,6 +226,7 @@
 		B715F03D2BAAB7BA009F65EC /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				B7F764302BAC4DAF0040D5DC /* ForecastFormatter.swift */,
 				B715F03B2BAAB7BA009F65EC /* CancelBag.swift */,
 				B715F03C2BAAB7BA009F65EC /* Log.swift */,
 			);
@@ -242,6 +276,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		B7CCF6A52BAC466800F57719 /* WeatherVKTests */ = {
+			isa = PBXGroup;
+			children = (
+				B7CCF6A62BAC466800F57719 /* WeatherVKTests.swift */,
+			);
+			path = WeatherVKTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -263,6 +305,24 @@
 			productReference = B715F0162BAAB776009F65EC /* WeatherVK.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B7CCF6A32BAC466800F57719 /* WeatherVKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7CCF6AA2BAC466800F57719 /* Build configuration list for PBXNativeTarget "WeatherVKTests" */;
+			buildPhases = (
+				B7CCF6A02BAC466800F57719 /* Sources */,
+				B7CCF6A12BAC466800F57719 /* Frameworks */,
+				B7CCF6A22BAC466800F57719 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B7CCF6A92BAC466800F57719 /* PBXTargetDependency */,
+			);
+			name = WeatherVKTests;
+			productName = WeatherVKTests;
+			productReference = B7CCF6A42BAC466800F57719 /* WeatherVKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -276,6 +336,10 @@
 					B715F0152BAAB776009F65EC = {
 						CreatedOnToolsVersion = 15.3;
 						LastSwiftMigration = 1530;
+					};
+					B7CCF6A32BAC466800F57719 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = B715F0152BAAB776009F65EC;
 					};
 				};
 			};
@@ -293,6 +357,7 @@
 			projectRoot = "";
 			targets = (
 				B715F0152BAAB776009F65EC /* WeatherVK */,
+				B7CCF6A32BAC466800F57719 /* WeatherVKTests */,
 			);
 		};
 /* End PBXProject section */
@@ -304,6 +369,13 @@
 			files = (
 				B715F0212BAAB777009F65EC /* Preview Assets.xcassets in Resources */,
 				B715F01E2BAAB777009F65EC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7CCF6A22BAC466800F57719 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7F764312BAC4DAF0040D5DC /* ForecastFormatter.swift in Sources */,
 				B715F04A2BAAB7BA009F65EC /* AppDelegate.swift in Sources */,
 				B715F05B2BAAB7BA009F65EC /* APIRouter.swift in Sources */,
 				B715F0522BAAB7BA009F65EC /* MainView.swift in Sources */,
@@ -345,6 +418,7 @@
 				B7CCF68D2BAB4BD900F57719 /* GetWeatherData200ResponseWeatherInner.swift in Sources */,
 				B7CCF69B2BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerSys.swift in Sources */,
 				B7CCF6962BAB4BD900F57719 /* GetWeatherData200ResponseWind.swift in Sources */,
+				B7CCF69F2BAC34E200F57719 /* ForcastWeatherCell.swift in Sources */,
 				B715F0552BAAB7BA009F65EC /* Log.swift in Sources */,
 				B7CCF6922BAB4BD900F57719 /* GetWeatherForecast200Response.swift in Sources */,
 				B7CCF6982BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerWind.swift in Sources */,
@@ -354,9 +428,11 @@
 				B715F0592BAAB7BA009F65EC /* APIConstants.swift in Sources */,
 				B7CCF68F2BAB4BD900F57719 /* GetWeatherData200ResponseClouds.swift in Sources */,
 				B715F04B2BAAB7BA009F65EC /* Weather.swift in Sources */,
+				B7F764332BAC574C0040D5DC /* DirtyForecast.swift in Sources */,
 				B715F04C2BAAB7BA009F65EC /* OpenWeather.swift in Sources */,
 				B7CCF6992BAB4BD900F57719 /* GetWeatherForecast200ResponseListInner.swift in Sources */,
 				B715F0502BAAB7BA009F65EC /* Cloud.swift in Sources */,
+				B7CCF6AE2BAC46EF00F57719 /* DayWeek.swift in Sources */,
 				B715F0582BAAB7BA009F65EC /* APIClient.swift in Sources */,
 				B715F0512BAAB7BA009F65EC /* ForecastTable.swift in Sources */,
 				B715F0472BAAB7BA009F65EC /* AppState.swift in Sources */,
@@ -370,7 +446,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B7CCF6A02BAC466800F57719 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7CCF6A72BAC466800F57719 /* WeatherVKTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B7CCF6A92BAC466800F57719 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B715F0152BAAB776009F65EC /* WeatherVK */;
+			targetProxy = B7CCF6A82BAC466800F57719 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B715F0222BAAB777009F65EC /* Debug */ = {
@@ -557,6 +649,46 @@
 			};
 			name = Release;
 		};
+		B7CCF6AB2BAC466800F57719 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P47CZ87RVS;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ubahwin.WeatherVKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeatherVK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WeatherVK";
+			};
+			name = Debug;
+		};
+		B7CCF6AC2BAC466800F57719 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P47CZ87RVS;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ubahwin.WeatherVKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeatherVK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WeatherVK";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -574,6 +706,15 @@
 			buildConfigurations = (
 				B715F0252BAAB777009F65EC /* Debug */,
 				B715F0262BAAB777009F65EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B7CCF6AA2BAC466800F57719 /* Build configuration list for PBXNativeTarget "WeatherVKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7CCF6AB2BAC466800F57719 /* Debug */,
+				B7CCF6AC2BAC466800F57719 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

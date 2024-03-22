@@ -57,6 +57,7 @@ struct MainView: View {
         }
         .onAppear {
             weatherReducer.loadWeather()
+            weatherReducer.loadForecast()
         }
     }
 }

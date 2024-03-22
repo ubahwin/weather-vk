@@ -24,6 +24,8 @@ struct WeatherReducer: IWeatherReducer {
         self.appState = appState
         self.weatherWebRepository = weatherWebRepository
         self.locationManager = locationManager
+
+        getUserLocation()
     }
 
     func loadForecast() {
@@ -42,6 +44,7 @@ struct WeatherReducer: IWeatherReducer {
         }
 
         observingPhoneRotate()
+        loadCity(from: coordinates)
         loadWeather(from: coordinates)
     }
 
@@ -49,6 +52,14 @@ struct WeatherReducer: IWeatherReducer {
         appState.$forecast
             .sink { _ in
                 reloadData()
+            }
+            .store(in: cancelBag)
+    }
+
+    private func loadCity(from coordinates: CLLocationCoordinate2D) {
+        locationManager.cityName
+            .sink { city in
+                appState.currentCity = city
             }
             .store(in: cancelBag)
     }

@@ -33,6 +33,13 @@ struct MainView: View {
             }
 
             VStack {
+                HStack {
+                    Text(appState.currentCity ?? "Поиск...")
+                        .font(.title)
+                        .bold()
+                        .padding(.top)
+                }
+                Spacer()
                 Cloud(width: 120, height: 80, moveRetio: 8) {
                     Text("\(appState.currentWeather?.temperature.description ?? "") °C")
                         .font(.title)
@@ -56,6 +63,7 @@ struct MainView: View {
                         Text("\(appState.currentWeather?.clouds.description ?? "") %")
                     }
                 }
+                Spacer()
             }
         }
         .onAppear {

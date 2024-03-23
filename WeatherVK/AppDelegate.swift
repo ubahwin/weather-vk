@@ -33,10 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         forecast.navigationBar.topItem?.title = "Forecast"
         forecast.overrideUserInterfaceStyle = .light
 
-        UITabBar.appearance().barTintColor = .white
-        UINavigationBar.appearance().barTintColor = .white
-        UITableView.appearance().tintColor = .white
-
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([main, forecast], animated: true)
         tabBarController.tabBar.tintColor = .blue

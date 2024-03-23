@@ -48,6 +48,11 @@
 		B7F764312BAC4DAF0040D5DC /* ForecastFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F764302BAC4DAF0040D5DC /* ForecastFormatter.swift */; };
 		B7F764332BAC574C0040D5DC /* DirtyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F764322BAC574C0040D5DC /* DirtyForecast.swift */; };
 		B7F764372BADE4100040D5DC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F764362BADE4100040D5DC /* Color.swift */; };
+		B7F764392BAEEF220040D5DC /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F764382BAEEF220040D5DC /* City.swift */; };
+		B7F7643B2BAF2DB20040D5DC /* CitySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7643A2BAF2DB20040D5DC /* CitySearch.swift */; };
+		B7F7643D2BAF3F500040D5DC /* RoundedTopRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7643C2BAF3F500040D5DC /* RoundedTopRectangle.swift */; };
+		B7F764412BAF472E0040D5DC /* KeyboardHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F764402BAF472D0040D5DC /* KeyboardHeight.swift */; };
+		B7F764442BAF48F30040D5DC /* LocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F764432BAF48F30040D5DC /* LocalRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +110,11 @@
 		B7F764302BAC4DAF0040D5DC /* ForecastFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastFormatter.swift; sourceTree = "<group>"; };
 		B7F764322BAC574C0040D5DC /* DirtyForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirtyForecast.swift; sourceTree = "<group>"; };
 		B7F764362BADE4100040D5DC /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B7F764382BAEEF220040D5DC /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		B7F7643A2BAF2DB20040D5DC /* CitySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearch.swift; sourceTree = "<group>"; };
+		B7F7643C2BAF3F500040D5DC /* RoundedTopRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTopRectangle.swift; sourceTree = "<group>"; };
+		B7F764402BAF472D0040D5DC /* KeyboardHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHeight.swift; sourceTree = "<group>"; };
+		B7F764432BAF48F30040D5DC /* LocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,22 +196,24 @@
 				B7CCF69C2BAC1DE400F57719 /* Forecast.swift */,
 				B7CCF6AD2BAC46EF00F57719 /* DayWeek.swift */,
 				B7F764322BAC574C0040D5DC /* DirtyForecast.swift */,
+				B7F764382BAEEF220040D5DC /* City.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		B715F02F2BAAB7BA009F65EC /* WebRepository */ = {
+		B715F02F2BAAB7BA009F65EC /* Web */ = {
 			isa = PBXGroup;
 			children = (
 				B715F02E2BAAB7BA009F65EC /* OpenWeather.swift */,
 			);
-			path = WebRepository;
+			path = Web;
 			sourceTree = "<group>";
 		};
 		B715F0302BAAB7BA009F65EC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				B715F02F2BAAB7BA009F65EC /* WebRepository */,
+				B7F764422BAF48DE0040D5DC /* Local */,
+				B715F02F2BAAB7BA009F65EC /* Web */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -211,6 +223,8 @@
 			children = (
 				B715F0352BAAB7BA009F65EC /* Cloud.swift */,
 				B7CCF69E2BAC34E200F57719 /* ForcastWeatherCell.swift */,
+				B7F7643A2BAF2DB20040D5DC /* CitySearch.swift */,
+				B7F7643C2BAF3F500040D5DC /* RoundedTopRectangle.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -228,6 +242,7 @@
 		B715F03D2BAAB7BA009F65EC /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				B7F764402BAF472D0040D5DC /* KeyboardHeight.swift */,
 				B7F764362BADE4100040D5DC /* Color.swift */,
 				B7F764302BAC4DAF0040D5DC /* ForecastFormatter.swift */,
 				B715F03B2BAAB7BA009F65EC /* CancelBag.swift */,
@@ -285,6 +300,14 @@
 				B7CCF6A62BAC466800F57719 /* WeatherVKTests.swift */,
 			);
 			path = WeatherVKTests;
+			sourceTree = "<group>";
+		};
+		B7F764422BAF48DE0040D5DC /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				B7F764432BAF48F30040D5DC /* LocalRepository.swift */,
+			);
+			path = Local;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -418,8 +441,10 @@
 				B7CCF68E2BAB4BD900F57719 /* GetWeatherData200ResponseMain.swift in Sources */,
 				B7CCF6952BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerMain.swift in Sources */,
 				B7CCF6902BAB4BD900F57719 /* GetWeatherForecast200ResponseCity.swift in Sources */,
+				B7F764412BAF472E0040D5DC /* KeyboardHeight.swift in Sources */,
 				B7CCF68D2BAB4BD900F57719 /* GetWeatherData200ResponseWeatherInner.swift in Sources */,
 				B7CCF69B2BAB4BD900F57719 /* GetWeatherForecast200ResponseListInnerSys.swift in Sources */,
+				B7F764392BAEEF220040D5DC /* City.swift in Sources */,
 				B7F764372BADE4100040D5DC /* Color.swift in Sources */,
 				B7CCF6962BAB4BD900F57719 /* GetWeatherData200ResponseWind.swift in Sources */,
 				B7CCF69F2BAC34E200F57719 /* ForcastWeatherCell.swift in Sources */,
@@ -437,11 +462,14 @@
 				B7CCF6992BAB4BD900F57719 /* GetWeatherForecast200ResponseListInner.swift in Sources */,
 				B715F0502BAAB7BA009F65EC /* Cloud.swift in Sources */,
 				B7CCF6AE2BAC46EF00F57719 /* DayWeek.swift in Sources */,
+				B7F764442BAF48F30040D5DC /* LocalRepository.swift in Sources */,
 				B715F0582BAAB7BA009F65EC /* APIClient.swift in Sources */,
 				B715F0512BAAB7BA009F65EC /* ForecastTable.swift in Sources */,
 				B715F0472BAAB7BA009F65EC /* AppState.swift in Sources */,
 				B715F0542BAAB7BA009F65EC /* CancelBag.swift in Sources */,
 				B7CCF6942BAB4BD900F57719 /* GetWeatherForecast200ResponseCityCoord.swift in Sources */,
+				B7F7643D2BAF3F500040D5DC /* RoundedTopRectangle.swift in Sources */,
+				B7F7643B2BAF2DB20040D5DC /* CitySearch.swift in Sources */,
 				B715F04F2BAAB7BA009F65EC /* WeatherReducer.swift in Sources */,
 				B7CCF6972BAB4BD900F57719 /* GetWeatherData200ResponseCoord.swift in Sources */,
 				B715F05D2BAABEDE009F65EC /* LocationManager.swift in Sources */,

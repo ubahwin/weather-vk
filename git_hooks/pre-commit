@@ -4,7 +4,7 @@
 #     cd .git/hooks
 #     ln -s ../../git_hooks/pre-commit
 
-file="../../WeatherVK/Network/APIConstants.swift"
+file="WeatherVK/Network/APIConstants.swift"
 
 regex="token.*=.*\"(.*)\"$"
 

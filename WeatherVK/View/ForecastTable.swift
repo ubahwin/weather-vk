@@ -1,7 +1,7 @@
 import UIKit
 import SwiftUI
 
-class ForecastTable: UITableViewController {
+final class ForecastTable: UITableViewController {
     var appState: AppState
     var weatherReducer: WeatherReducer
 

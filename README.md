@@ -113,6 +113,22 @@ WeatherVK
 
 ### SwiftLint
 
+В Build Phases используется следующий Run Script, запускающий линтер
+[SwiftLint](https://github.com/realm/SwiftLint) перед сборкой проекта:
+
+```bash
+if [[ "$(uname -m)" == arm64 ]]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+
+if which swiftlint >/dev/null; then
+  swiftlint --strict --config ./.swiftlint.yml
+else
+  echo "error: SwiftLint does not exist"
+  exit 1
+fi
+```
+
 ### Git Hooks
 
 Для защиты токена был написан Git Hook pre-commit, который заменяет вхождения

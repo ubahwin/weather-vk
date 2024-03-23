@@ -55,8 +55,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ILocationManag
                     return
                 }
 
-                print(response.mapItems)
-
                 let cities = response.mapItems.compactMap { mapItem -> City? in
                     guard
                         let cityName = mapItem.name,
@@ -113,21 +111,13 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ILocationManag
 }
 
 class StubLocationManager: ILocationManager {
+    let phoneRotateDegrees = CurrentValueSubject<Double, Never>(0)
+
     func loadCities(from search: String) -> AnyPublisher<[City], Never> {
         Just<[City]>([]).eraseToAnyPublisher()
     }
 
     func loadCurrentCity() -> AnyPublisher<City, Never> {
         Just<City>(.stub).eraseToAnyPublisher()
-    }
-
-    let cityName = CurrentValueSubject<String, Never>("")
-    let phoneRotateDegrees = CurrentValueSubject<Double, Never>(0)
-    let userLocation = CurrentValueSubject<CLLocationCoordinate2D, Never>(CLLocationCoordinate2D())
-
-    init() {
-        userLocation.send(CLLocationCoordinate2D(latitude: 1, longitude: 1))
-        phoneRotateDegrees.send(1)
-        cityName.send("SPb")
     }
 }

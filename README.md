@@ -40,8 +40,8 @@ Storyboard. Главное меню – на `SwiftUI`. Реализован п�
 покрыт Unit-тестами. Составляется выборка с конкретными днями недели и данными.
 
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 24px; row-gap: 20px;">
-  <img src="img/1.jpeg" alt="Главное меню" style="width:200px;">
-  <img src="img/2.jpeg" alt="Таблица прогноза" style="width:200px;">
+  <img src="img/1.png" alt="Главное меню" style="width:200px;">
+  <img src="img/2.png" alt="Таблица прогноза погоды" style="width:200px;">
 </div>
 
 ## Архитектура

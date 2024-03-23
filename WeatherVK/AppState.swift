@@ -3,9 +3,10 @@ import MapKit
 
 class AppState: ObservableObject {
     @Published var currentWeather: Weather?
-    @Published var currentCity: String?
+    @Published var currentCity: City?
     @Published var forecast: [Forecast]?
 
-    @Published var userCoordinates: CLLocationCoordinate2D?
     @Published var phoneRotateDegrees: Double = 0
+
+    @Published var cityList: [City] = []
 }

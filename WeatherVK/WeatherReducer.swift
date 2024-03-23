@@ -1,8 +1,11 @@
 import MapKit
+import Combine
 
 protocol IWeatherReducer {
     func loadWeather()
     func loadForecast()
+    func reloadData()
+    func loadCity(from search: String)
 
     func sinkToData(_ reloadData: @escaping () -> Void)
 }
@@ -24,32 +27,69 @@ struct WeatherReducer: IWeatherReducer {
         self.appState = appState
         self.weatherWebRepository = weatherWebRepository
         self.locationManager = locationManager
+
+        _ = loadCity()
+        observingPhoneRotate()
+    }
+
+    func loadCity(from search: String) {
+        locationManager.loadCities(from: search)
+            .sink { cities in
+                appState.cityList = cities
+            }
+            .store(in: cancelBag)
+    }
+
+    func reloadData() {
+        loadForecast()
+        loadWeather()
     }
 
     func loadForecast() {
-        guard let coordinates = appState.userCoordinates else {
-            getUserLocation()
-            return
-        }
+        loadCity()
+            .sink { _ in
+                guard let coordinates = appState.currentCity?.coordinates else {
+                    return
+                }
 
-        loadForecast(from: coordinates)
+                loadForecast(from: coordinates)
+            }
+            .store(in: cancelBag)
     }
 
     func loadWeather() {
-        guard let coordinates = appState.userCoordinates else {
-            getUserLocation()
-            return
-        }
+        loadCity()
+            .sink { _ in
+                guard let coordinates = appState.currentCity?.coordinates else {
+                    return
+                }
 
-        observingPhoneRotate()
-        loadWeather(from: coordinates)
+                loadWeather(from: coordinates)
+            }
+            .store(in: cancelBag)
     }
 
-    func sinkToData(_ reloadData: @escaping () -> Void) {
-        appState.$forecast
-            .sink { _ in
-                reloadData()
+    private func loadCity() -> AnyPublisher<Void, Never> {
+        if appState.currentCity != nil {
+            return Just(()).eraseToAnyPublisher()
+        }
+
+        return locationManager.loadCurrentCity()
+            .map { city in
+                appState.currentCity = city
             }
+            .eraseToAnyPublisher()
+    }
+
+    private func loadWeather(from coordinates: CLLocationCoordinate2D) {
+        weatherWebRepository.loadWeather(coordinates: coordinates)
+            .sink(receiveCompletion: { completion in
+                if case let .failure(error) = completion {
+                    Log.error(error.localizedDescription)
+                }
+            }, receiveValue: { weather in
+                appState.currentWeather = weather
+            })
             .store(in: cancelBag)
     }
 
@@ -68,25 +108,12 @@ struct WeatherReducer: IWeatherReducer {
             .store(in: cancelBag)
     }
 
-    private func loadWeather(from coordinates: CLLocationCoordinate2D) {
-        weatherWebRepository.loadWeather(coordinates: coordinates)
-            .sink(receiveCompletion: { completion in
-                if case let .failure(error) = completion {
-                    Log.error(error.localizedDescription)
-                }
-            }, receiveValue: { weather in
-                appState.currentWeather = weather
-            })
-            .store(in: cancelBag)
-    }
-
-    private func getUserLocation() {
-        locationManager.userLocation
-            .sink { coordinates in
-                appState.userCoordinates = coordinates
-                self.loadWeather(from: coordinates)
+    func sinkToData(_ reloadData: @escaping () -> Void) {
+        appState.$forecast
+            .sink { _ in
+                reloadData()
             }
-            .cancel()
+            .store(in: cancelBag)
     }
 
     private func observingPhoneRotate() {

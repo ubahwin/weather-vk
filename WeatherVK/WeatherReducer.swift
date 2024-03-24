@@ -7,6 +7,8 @@ protocol IWeatherReducer {
     func reloadData()
     func loadCity(from search: String)
 
+    func loadCurrentCity()
+
     func sinkToData(_ reloadData: @escaping () -> Void)
 }
 
@@ -30,6 +32,12 @@ struct WeatherReducer: IWeatherReducer {
 
         _ = loadCity()
         observingPhoneRotate()
+    }
+
+    func loadCurrentCity() {
+        appState.currentCity = nil
+
+        _ = loadCity()
     }
 
     func loadCity(from search: String) {
@@ -76,6 +84,7 @@ struct WeatherReducer: IWeatherReducer {
 
         return locationManager.loadCurrentCity()
             .map { city in
+                print(city)
                 appState.currentCity = city
             }
             .eraseToAnyPublisher()

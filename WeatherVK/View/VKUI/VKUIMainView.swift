@@ -6,14 +6,20 @@ struct VKUIMainView: View {
 
     @State private var openSearch = false
 
+    private let mockData: [Forecast] = [.stub, .stub, .stub, .stub]
+
     var body: some View {
         ZStack {
             Color(hex: 0xEBEDF0).ignoresSafeArea()
 
             ScrollView {
                 VStack {
-                    Text("\(appState.currentWeather?.temperature ?? 0)°")
-                        .font(.system(size: 50))
+                    VStack {
+                        appState.currentWeather?.type.title
+                        Text("\(appState.currentWeather?.temperature ?? 0)°")
+                            .font(.system(size: 50))
+                            .redacted(reason: appState.currentWeather == nil ? .placeholder : .init())
+                    }
 
                     SmallLine()
 
@@ -63,7 +69,7 @@ struct VKUIMainView: View {
                                 Text("давление")
                                     .foregroundStyle(.gray)
                                     .font(.footnote)
-                                Text("\(appState.currentWeather?.pressure ?? 0) мм рт. ст.")
+                                Text("\(appState.currentWeather?.pressureInMmHg ?? 0) мм рт. ст.")
                             }
 
                             Spacer()
@@ -78,13 +84,14 @@ struct VKUIMainView: View {
                                 Text("видимость")
                                     .foregroundStyle(.gray)
                                     .font(.footnote)
-                                Text("\(appState.currentWeather?.visibility ?? 0) м")
+                                Text("\(appState.currentWeather?.visibilityInKm ?? 0) км")
                             }
 
                             Spacer()
                         }
                         .padding(.horizontal)
                     }
+                    .redacted(reason: appState.currentWeather == nil ? .placeholder : .init())
 
                     SmallLine()
                         .padding(.top)
@@ -96,31 +103,21 @@ struct VKUIMainView: View {
                         Spacer()
                     }
 
-                    ForEach(appState.forecast ?? [], id: \.date) { forecast in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(forecast.date.dayOfWeek.titleVKUI)
-                                    .foregroundStyle(forecast.date.dayOfWeek.isWeekend ? Color(hex: 0xE64646) : .black)
-                                Text(forecast.date.title)
-                                    .foregroundStyle(.gray)
-                                    .font(.footnote)
-                            }
-                            Spacer()
-                            Text("\(forecast.weather.maxTemp)°")
-                                .frame(width: 60)
-                                .bold()
-                            Text("\(forecast.weather.minTemp)°")
-                                .bold()
-                                .foregroundStyle(Color(hex: 0x76787A))
+                    if appState.forecast == nil {
+                        ForEach(mockData, id: \.date) {
+                            ForecastCell(forecast: $0)
                         }
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
+                        .redacted(reason: appState.currentWeather == nil ? .placeholder : .init())
+                    } else {
+                        ForEach(appState.forecast ?? [], id: \.date) {
+                            ForecastCell(forecast: $0)
+                        }
                     }
                 }
                 .padding(.top, 80)
             }
 
-            VStack{
+            VStack {
                 ZStack {
                     Rectangle()
                         .fill(Color(hex: 0xE1E3E6))

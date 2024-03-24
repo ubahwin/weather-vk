@@ -5,6 +5,8 @@ struct Weather {
     var windSpeed: Double
     var windDirectDegrees: Double
     var clouds: Int
+    var pressure: Int
+    var visibility: Int
 }
 
 extension Weather {
@@ -15,7 +17,9 @@ extension Weather {
             maxTemp: 3,
             windSpeed: 2,
             windDirectDegrees: 2,
-            clouds: 2
+            clouds: 2,
+            pressure: 2,
+            visibility: 2
         )
     }
 }

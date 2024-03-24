@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct VKUITextFieldStyle: TextFieldStyle {
+    // swiftlint:disable identifier_name
     func _body(configuration: TextField<Self._Label>) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -12,9 +13,9 @@ struct VKUITextFieldStyle: TextFieldStyle {
                     .padding(.leading, 8)
                 configuration
             }
-//            .foregroundStyle(.gray)
         }
     }
+    // swiftlint:enable identifier_name
 }
 
 #Preview {

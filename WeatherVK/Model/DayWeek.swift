@@ -7,6 +7,18 @@ enum DayWeek: Int {
     case friday = 6
     case saturday = 7
 
+    var titleVKUI: String {
+        switch self {
+        case .sunday: "воскресенье"
+        case .monday: "понедельник"
+        case .tuesday: "вторник"
+        case .wednesday: "среда"
+        case .thursday: "четверг"
+        case .friday: "пятница"
+        case .saturday: "суббота"
+        }
+    }
+
     var title: String {
         switch self {
         case .sunday: "Sunday"
@@ -17,5 +29,11 @@ enum DayWeek: Int {
         case .friday: "Friday"
         case .saturday: "Saturday"
         }
+    }
+}
+
+extension DayWeek {
+    var isWeekend: Bool {
+        self == .saturday || self == .sunday
     }
 }

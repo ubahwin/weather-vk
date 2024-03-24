@@ -99,7 +99,7 @@ struct VKUIMainView: View {
                     ForEach(appState.forecast ?? [], id: \.date) { forecast in
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(forecast.date.dayOfWeek.title)
+                                Text(forecast.date.dayOfWeek.titleVKUI)
                                     .foregroundStyle(forecast.date.dayOfWeek.isWeekend ? Color(hex: 0xE64646) : .black)
                                 Text(forecast.date.title)
                                     .foregroundStyle(.gray)

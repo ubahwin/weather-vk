@@ -11,3 +11,14 @@ extension Color {
         )
     }
 }
+
+extension UIColor {
+    convenience init(hex: UInt, alpha: CGFloat = 1.0) {
+        self.init(
+            red: CGFloat((hex >> 16) & 0xff) / 255,
+            green: CGFloat((hex >> 8) & 0xff) / 255,
+            blue: CGFloat(hex & 0xff) / 255,
+            alpha: alpha
+        )
+    }
+}

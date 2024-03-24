@@ -21,11 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .environmentObject(appState)
             .environment(\.colorScheme, .light)
 
+        let vkuiMainView = VKUIMainView()
+            .environment(\.weatherReducer, weatherReducer)
+            .environmentObject(appState)
+            .environment(\.colorScheme, .light)
+
         let forecastView = ForecastTable(appState: appState, weatherReducer: weatherReducer)
 
-        let main = UIHostingController(rootView: mainView)
-        main.tabBarItem.title = "Main"
-        main.tabBarItem.image = UIImage(systemName: "cloud.sun")
+        let myMain = UIHostingController(rootView: mainView)
+        myMain.tabBarItem.title = "Main"
+        myMain.tabBarItem.image = UIImage(systemName: "cloud.sun")
+
+        let vkuiMain = UIHostingController(rootView: vkuiMainView)
+        vkuiMain.tabBarItem.title = "Main"
+        vkuiMain.tabBarItem.image = UIImage(systemName: "cloud.sun")
 
         let forecast = UINavigationController(rootViewController: forecastView)
         forecast.tabBarItem.title = "Forecast"
@@ -34,13 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         forecast.overrideUserInterfaceStyle = .light
 
         let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([main, forecast], animated: true)
+        tabBarController.setViewControllers([myMain, forecast], animated: true)
         tabBarController.tabBar.tintColor = .blue
         tabBarController.tabBar.unselectedItemTintColor = .black
         tabBarController.overrideUserInterfaceStyle = .light
 
         let window = UIWindow()
-        window.rootViewController = tabBarController
+        window.rootViewController = vkuiMain
         window.makeKeyAndVisible()
 
         self.window = window

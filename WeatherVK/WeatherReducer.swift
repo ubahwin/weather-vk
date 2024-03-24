@@ -9,7 +9,8 @@ protocol IWeatherReducer {
 
     func loadCurrentCity()
 
-    func sinkToData(_ reloadData: @escaping () -> Void)
+    func sinkToAllData(_ completion: @escaping () -> Void)
+    func sinkToForecast(_ reloadData: @escaping () -> Void)
 }
 
 struct WeatherReducer: IWeatherReducer {
@@ -32,6 +33,26 @@ struct WeatherReducer: IWeatherReducer {
 
         _ = loadCity()
         observingPhoneRotate()
+    }
+
+    func sinkToAllData(_ completion: @escaping () -> Void) {
+        appState.$forecast
+            .sink { _ in
+                completion()
+            }
+            .store(in: cancelBag)
+
+        appState.$currentCity
+            .sink { _ in
+                completion()
+            }
+            .store(in: cancelBag)
+
+        appState.$currentWeather
+            .sink { _ in
+                completion()
+            }
+            .store(in: cancelBag)
     }
 
     func loadCurrentCity() {
@@ -117,7 +138,7 @@ struct WeatherReducer: IWeatherReducer {
             .store(in: cancelBag)
     }
 
-    func sinkToData(_ reloadData: @escaping () -> Void) {
+    func sinkToForecast(_ reloadData: @escaping () -> Void) {
         appState.$forecast
             .sink { _ in
                 reloadData()

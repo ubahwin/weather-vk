@@ -36,6 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         vkuiMain.tabBarItem.title = "Main"
         vkuiMain.tabBarItem.image = UIImage(systemName: "cloud.sun")
 
+        let vkuiUIKitMain = UINavigationController(rootViewController: MainViewController(
+            appState: appState,
+            weatherReducer: weatherReducer
+        ))
+
         let forecast = UINavigationController(rootViewController: forecastView)
         forecast.tabBarItem.title = "Forecast"
         forecast.tabBarItem.image = UIImage(systemName: "table")
@@ -49,9 +54,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.overrideUserInterfaceStyle = .light
 
         let window = UIWindow()
-        window.rootViewController = vkuiMain
-        window.makeKeyAndVisible()
 
+        // Подставьте сюда контроллер на свой выбор
+        window.rootViewController = vkuiUIKitMain
+
+        window.makeKeyAndVisible()
         self.window = window
 
         return true

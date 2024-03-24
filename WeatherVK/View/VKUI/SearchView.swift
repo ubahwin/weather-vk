@@ -84,7 +84,6 @@ struct SearchView: View {
                             }
 
                         }
-                                          
                     }
                 }
             }

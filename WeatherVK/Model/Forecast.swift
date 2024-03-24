@@ -7,6 +7,6 @@ struct Forecast {
 
 extension Forecast {
     static var stub: Self {
-        Self(date: Date(), weather: .stub)
+        Self(date: Date(timeIntervalSince1970: 1711324800), weather: .stub)
     }
 }

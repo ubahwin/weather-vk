@@ -8,7 +8,9 @@ struct Mapper {
             maxTemp: Int(curWeatherResponse.main?.tempMax ?? 0),
             windSpeed: curWeatherResponse.wind?.speed ?? 0,
             windDirectDegrees: Double(curWeatherResponse.wind?.deg ?? 0),
-            clouds: curWeatherResponse.clouds?.all ?? 0
+            clouds: curWeatherResponse.clouds?.all ?? 0,
+            pressure: curWeatherResponse.main?.pressure ?? 0,
+            visibility: curWeatherResponse.visibility ?? 0
         )
     }
 

@@ -1,8 +1,6 @@
 import Foundation
 
 class ForecastFormatter {
-    private let calendar = Calendar.current
-
     func clean(dirtyForecast: DirtyForecast) -> [Forecast] {
         let list = dirtyForecast.weatherList
 
@@ -15,15 +13,15 @@ class ForecastFormatter {
         var rightDayWeek: DayWeek = .monday
 
         for rightIndex in 1..<list.count {
-            leftDayWeek = calcDayWeek(utc: list[leftIndex].timestamp)
-            rightDayWeek = calcDayWeek(utc: list[rightIndex].timestamp)
+            leftDayWeek = Date(timeIntervalSince1970: list[leftIndex].timestamp).dayOfWeek
+            rightDayWeek = Date(timeIntervalSince1970: list[rightIndex].timestamp).dayOfWeek
 
             if leftDayWeek == rightDayWeek && rightIndex != list.count - 1 {
                 continue
             }
 
             let forecast = Forecast(
-                dayweek: calcDayWeek(utc: list[leftIndex].timestamp),
+                date: Date(timeIntervalSince1970: list[leftIndex].timestamp),
                 weather: createAverageWeather(list: Array(list[leftIndex..<rightIndex]))
             )
 
@@ -53,13 +51,24 @@ class ForecastFormatter {
             maxTemp: maxTemp,
             windSpeed: windSpeed,
             windDirectDegrees: 0,
-            clouds: clouds
+            clouds: clouds,
+            pressure: 0,
+            visibility: 0
         )
     }
+}
 
-    func calcDayWeek(utc: TimeInterval) -> DayWeek {
-        let date = Date(timeIntervalSince1970: utc)
-        let weekday = calendar.component(.weekday, from: date)
+extension Date {
+    private static let dateFormatter = DateFormatter()
+
+    var dayOfWeek: DayWeek {
+        let weekday = Calendar.current.component(.weekday, from: self)
         return DayWeek(rawValue: weekday) ?? .friday
+    }
+
+    var title: String {
+        Date.dateFormatter.dateFormat = "dd MMMM"
+        Date.dateFormatter.locale = Locale(identifier: "ru_RU")
+        return Date.dateFormatter.string(from: self).lowercased()
     }
 }

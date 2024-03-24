@@ -4,30 +4,6 @@ import XCTest
 final class WeatherVKTests: XCTestCase {
     private let forecastFormat = ForecastFormatter()
 
-    func test_forecastFormat_calcDayWeek_fromTimeStamp1() {
-        let timeInt: TimeInterval = 1711022400
-        XCTAssertEqual(
-            forecastFormat.calcDayWeek(utc: timeInt),
-            .thursday
-        )
-    }
-
-    func test_forecastFormat_calcDayWeek_fromTimeStamp2() {
-        let timeInt: TimeInterval = 1711054800
-        XCTAssertEqual(
-            forecastFormat.calcDayWeek(utc: timeInt),
-            .friday
-        )
-    }
-
-    func test_forecastFormat_calcDayWeek_fromTimeStamp3() {
-        let timeInt: TimeInterval = 1711324800
-        XCTAssertEqual(
-            forecastFormat.calcDayWeek(utc: timeInt),
-            .monday
-        )
-    }
-
     func test_forecastFormat_clean_empty() {
         let dirtyForecast = DirtyForecast(weatherList: [])
 
@@ -91,25 +67,29 @@ final class WeatherVKTests: XCTestCase {
             forecastFormat.clean(dirtyForecast: dirtyForecast),
             [
                 Forecast(
-                    dayweek: .monday,
+                    date: Date(timeIntervalSince1970: 1711324800),
                     weather: Weather(
                         temperature: 0,
                         minTemp: 1,
                         maxTemp: 1,
                         windSpeed: 1,
                         windDirectDegrees: 0,
-                        clouds: 1
+                        clouds: 1,
+                        pressure: 1,
+                        visibility: 1
                     )
                 ),
                 Forecast(
-                    dayweek: .thursday,
+                    date: Date(timeIntervalSince1970: 1711022400),
                     weather: Weather(
                         temperature: 0,
                         minTemp: 2,
                         maxTemp: 2,
                         windSpeed: 2,
                         windDirectDegrees: 0,
-                        clouds: 2
+                        clouds: 2,
+                        pressure: 1,
+                        visibility: 1
                     )
                 )
             ]
@@ -170,7 +150,9 @@ final class WeatherVKTests: XCTestCase {
                 maxTemp: 10,
                 windSpeed: 4,
                 windDirectDegrees: 0,
-                clouds: 50
+                clouds: 50,
+                pressure: 1,
+                visibility: 1
             )
         )
     }
@@ -178,7 +160,7 @@ final class WeatherVKTests: XCTestCase {
 
 extension Forecast: Equatable {
     public static func == (lhs: WeatherVK.Forecast, rhs: WeatherVK.Forecast) -> Bool {
-        lhs.dayweek == rhs.dayweek && lhs.weather == rhs.weather
+        lhs.date == rhs.date && lhs.weather == rhs.weather
     }
 }
 

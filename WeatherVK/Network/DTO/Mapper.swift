@@ -3,6 +3,7 @@ import Foundation
 struct Mapper {
     static func currentWeatherToModel(_ curWeatherResponse: GetWeatherData200Response) -> Weather {
         Weather(
+            type: WeatherType(rawValue: (curWeatherResponse.weather?.first?.main)!) ?? .clearSky,
             temperature: Int(curWeatherResponse.main?.temp ?? 0),
             minTemp: Int(curWeatherResponse.main?.tempMin ?? 0),
             maxTemp: Int(curWeatherResponse.main?.tempMax ?? 0),

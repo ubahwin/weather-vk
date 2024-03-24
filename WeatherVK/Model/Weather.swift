@@ -1,4 +1,7 @@
+import Foundation
+
 struct Weather {
+    var type: WeatherType
     var temperature: Int
     var minTemp: Int
     var maxTemp: Int
@@ -7,11 +10,20 @@ struct Weather {
     var clouds: Int
     var pressure: Int
     var visibility: Int
+
+    var pressureInMmHg: Int {
+        Int(round(Double(self.pressure) * 0.75))
+    }
+
+    var visibilityInKm: Int {
+        Int(round(Double(self.visibility) / 1000))
+    }
 }
 
 extension Weather {
     static var stub: Self {
         Self(
+            type: .clearSky,
             temperature: 2,
             minTemp: 2,
             maxTemp: 3,

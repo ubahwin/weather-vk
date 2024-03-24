@@ -46,6 +46,7 @@ class ForecastFormatter {
         let clouds = list.reduce(0) { $0 + ($1.clouds) } / list.count
 
         return Weather(
+            type: .clearSky,
             temperature: 0,
             minTemp: minTemp,
             maxTemp: maxTemp,

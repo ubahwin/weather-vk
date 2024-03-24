@@ -41,12 +41,12 @@ final class ForecastTable: UITableViewController {
         }
 
         guard
-            let dayweek = self.appState.forecast?[indexPath.row].dayweek,
+            let date = self.appState.forecast?[indexPath.row].date,
             let weather = self.appState.forecast?[indexPath.row].weather
         else { return ForcastWeatherCell() }
 
         cell.backgroundColor = .white
-        cell.configure(dayweek: dayweek, weather: weather)
+        cell.configure(dayweek: date.dayOfWeek, weather: weather)
         cell.isUserInteractionEnabled = false
 
         return cell

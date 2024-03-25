@@ -19,6 +19,7 @@ final class WeatherVKTests: XCTestCase {
 
         let weatherList = [
             DirtyWeather(
+                type: .clearSky,
                 timestamp: timeIntMonday,
                 minTemp: 1,
                 maxTemp: 1,
@@ -26,6 +27,7 @@ final class WeatherVKTests: XCTestCase {
                 clouds: 1
             ),
             DirtyWeather(
+                type: .clearSky,
                 timestamp: timeIntMonday,
                 minTemp: 1,
                 maxTemp: 1,
@@ -33,6 +35,7 @@ final class WeatherVKTests: XCTestCase {
                 clouds: 1
             ),
             DirtyWeather(
+                type: .clearSky,
                 timestamp: timeIntMonday,
                 minTemp: 1,
                 maxTemp: 1,
@@ -40,6 +43,7 @@ final class WeatherVKTests: XCTestCase {
                 clouds: 1
             ),
             DirtyWeather(
+                type: .clearSky,
                 timestamp: timeIntMonday,
                 minTemp: 1,
                 maxTemp: 1,
@@ -47,6 +51,7 @@ final class WeatherVKTests: XCTestCase {
                 clouds: 1
             ),
             DirtyWeather(
+                type: .clearSky,
                 timestamp: timeIntThursday,
                 minTemp: 2,
                 maxTemp: 2,
@@ -54,6 +59,7 @@ final class WeatherVKTests: XCTestCase {
                 clouds: 2
             ),
             DirtyWeather(
+                type: .clearSky,
                 timestamp: timeIntThursday,
                 minTemp: 2,
                 maxTemp: 2,
@@ -69,6 +75,7 @@ final class WeatherVKTests: XCTestCase {
                 Forecast(
                     date: Date(timeIntervalSince1970: 1711324800),
                     weather: Weather(
+                        type: .clearSky,
                         temperature: 0,
                         minTemp: 1,
                         maxTemp: 1,
@@ -82,6 +89,7 @@ final class WeatherVKTests: XCTestCase {
                 Forecast(
                     date: Date(timeIntervalSince1970: 1711022400),
                     weather: Weather(
+                        type: .clearSky,
                         temperature: 0,
                         minTemp: 2,
                         maxTemp: 2,
@@ -98,6 +106,7 @@ final class WeatherVKTests: XCTestCase {
 
     let createAverageWeatherList1 = [
         DirtyWeather(
+            type: .clearSky,
             timestamp: 1711324800,
             minTemp: 7,
             maxTemp: 4,
@@ -105,6 +114,7 @@ final class WeatherVKTests: XCTestCase {
             clouds: 0
         ),
         DirtyWeather(
+            type: .clearSky,
             timestamp: 1711324800,
             minTemp: 2,
             maxTemp: 9,
@@ -112,6 +122,7 @@ final class WeatherVKTests: XCTestCase {
             clouds: 0
         ),
         DirtyWeather(
+            type: .clearSky,
             timestamp: 1711324800,
             minTemp: 3,
             maxTemp: 2,
@@ -119,6 +130,7 @@ final class WeatherVKTests: XCTestCase {
             clouds: 0
         ),
         DirtyWeather(
+            type: .clearSky,
             timestamp: 1711324800,
             minTemp: -4,
             maxTemp: -1,
@@ -126,6 +138,7 @@ final class WeatherVKTests: XCTestCase {
             clouds: 100
         ),
         DirtyWeather(
+            type: .clearSky,
             timestamp: 1711324800,
             minTemp: 4,
             maxTemp: 10,
@@ -133,6 +146,7 @@ final class WeatherVKTests: XCTestCase {
             clouds: 100
         ),
         DirtyWeather(
+            type: .clearSky,
             timestamp: 1711324800,
             minTemp: 5,
             maxTemp: 1,
@@ -145,6 +159,7 @@ final class WeatherVKTests: XCTestCase {
         XCTAssertEqual(
             forecastFormat.createAverageWeather(list: createAverageWeatherList1),
             Weather(
+                type: .clearSky,
                 temperature: 0,
                 minTemp: -4,
                 maxTemp: 10,
@@ -155,6 +170,64 @@ final class WeatherVKTests: XCTestCase {
                 visibility: 1
             )
         )
+    }
+
+    func test_forecastFormat_mostCommonWeatherType_clearSky() {
+        let weatherTypes: [WeatherType] = [.clearSky, .clearSky, .clearSky, .clouds]
+
+        XCTAssertEqual(
+            forecastFormat.mostCommonWeatherType(weatherTypes),
+            .clearSky
+        )
+    }
+
+    func test_forecastFormat_mostCommonWeatherType_equalCount() {
+        let weatherTypes: [WeatherType] = [.clearSky, .clearSky, .clearSky, .clouds, .clouds, .clouds]
+
+        XCTAssertEqual(
+            forecastFormat.mostCommonWeatherType(weatherTypes),
+            .clearSky
+        )
+    }
+
+    func test_forecastFormat_mostCommonWeatherType_one() {
+        let weatherTypes: [WeatherType] = [.clouds]
+
+        XCTAssertEqual(
+            forecastFormat.mostCommonWeatherType(weatherTypes),
+            .clouds
+        )
+    }
+
+    func test_forecastFormat_mostCommonWeatherType_alotof() {
+        let weatherTypes: [WeatherType] = [
+            .clouds,
+            .clouds,
+            .clouds,
+            .mist,
+            .mist,
+            .rain,
+            .snow
+        ]
+
+        XCTAssertEqual(
+            forecastFormat.mostCommonWeatherType(weatherTypes),
+            .clouds
+        )
+    }
+
+    func test_Date_IsSameDay() {
+        var date1 = Date()
+        var date2 = date1
+        XCTAssertTrue(date1.isSameDay(with: date2))
+
+        date1 = Date()
+        date2 = Calendar.current.date(byAdding: .day, value: 1, to: date1)!
+        XCTAssertFalse(date1.isSameDay(with: date2))
+
+        date1 = Date()
+        date2 = Calendar.current.date(byAdding: .second, value: 1, to: date1)!
+        XCTAssertTrue(date1.isSameDay(with: date2))
     }
 }
 

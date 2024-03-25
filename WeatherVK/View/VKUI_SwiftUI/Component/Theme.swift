@@ -6,17 +6,15 @@ struct Theme: View {
     @State private var offset = CGSize()
 
     let weatherType: WeatherType
-    let date: Date
 
-    let dayColors: ColorPair
-    let nightColors: ColorPair
+    let colors: ColorPair
 
     var body: some View {
         ZStack {
             LinearGradient(
                 gradient: .init(colors: [
-                    date.isDaytime ? dayColors.first : nightColors.first,
-                    date.isDaytime ? dayColors.second : nightColors.second
+                    colors.first,
+                    colors.second
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
@@ -86,7 +84,7 @@ struct Theme: View {
         .offset(offset)
         .frame(width: 300, height: 150)
         .clipShape(RoundedRectangle(cornerRadius: 25))
-        .shadow(radius: 10, y: 10)
+        .shadow(color: colors.calculateAvg(), radius: 10, y: 10)
         .onAppear {
             startMotionUpdates()
         }
@@ -113,8 +111,6 @@ struct Theme: View {
 #Preview {
     Theme(
         weatherType: .clearSky,
-        date: .now,
-        dayColors: ColorPair(.white, .blue),
-        nightColors: ColorPair(.white, Color(hex: 0x050921))
+        colors: ColorPair(.white, .blue)
     )
 }

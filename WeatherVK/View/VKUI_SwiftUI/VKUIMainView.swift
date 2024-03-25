@@ -27,15 +27,13 @@ struct VKUIMainView: View {
                         } else {
                             Theme(
                                 weatherType: appState.currentWeather?.type ?? .clearSky,
-                                date: now,
-                                dayColors: themeDayColors,
-                                nightColors: themeNightColors
+                                colors: now.isDaytime ? themeDayColors : themeNightColors
                             )
 
                             Text("\(appState.currentWeather?.temperature ?? 0)°")
                                 .font(.system(size: 80))
                                 .bold()
-                                .foregroundStyle(themeNightColors.calculateContrastColor())
+                                .foregroundStyle(Color(hex: 0xfefefe))
                                 .shadow(color: Color(hex: 0x070820, alpha: now.isDaytime ? 0.1 : 1), radius: 5)
                         }
                     }

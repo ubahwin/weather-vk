@@ -22,12 +22,4 @@ struct ColorPair {
             blue: (pair.0.B + pair.1.B) / 2
         )
     }
-
-    func calculateContrastColor() -> Color {
-        let avgColor = calculateAvg()
-
-        let luminance = 0.299 * avgColor.R + 0.587 * avgColor.G + 0.114 * avgColor.B
-
-        return luminance > 0.5 ? Color(hex: 0x070820) : Color(hex: 0xf3f3f3)
-    }
 }

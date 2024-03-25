@@ -72,4 +72,9 @@ extension Date {
         Date.dateFormatter.locale = Locale(identifier: "ru_RU")
         return Date.dateFormatter.string(from: self).lowercased()
     }
+
+    var isDaytime: Bool {
+        let hour = Calendar.current.component(.hour, from: self)
+        return hour >= 6 && hour < 21
+    }
 }

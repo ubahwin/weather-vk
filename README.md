@@ -11,6 +11,7 @@
 
 ## Содержание <!-- omit in toc -->
 
+- [О проекте](#о-проекте)
 - [Архитектура](#архитектура)
 - [OpenAPI](#openapi)
 - [Установка](#установка)
@@ -20,6 +21,8 @@
   - [Git Hooks](#git-hooks)
 - [Старый дизайн](#старый-дизайн)
 - [Технологии и инструменты](#технологии-и-инструменты)
+
+## О проекте
 
 Приложение имеет расширяемую _Redux-like_ архитектуру. Для обеспечения
 реактивности различных делегатов, таких как из `CoreLocation`, `MapKit` и т.д.,
@@ -47,9 +50,11 @@
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 24px; row-gap: 20px;">
   <img src="img/1.jpg" alt="Главное меню" style="width:200px;">
   <img src="img/2.jpg" alt="Поиск по городам" style="width:200px;">
-  <img src="img/3.jpg" alt="" style="width:200px;">
-
+  <img src="img/3.jpg" alt="Forecast" style="width:200px;">
+  <img src="img/4.jpg" alt="Skeleton" style="width:200px;">
 </div>
+
+https://github.com/ubahwin/weather-vk/assets/98765309/9bc75ead-ca97-429b-a5b1-d4da6d40f18a
 
 ## Архитектура
 

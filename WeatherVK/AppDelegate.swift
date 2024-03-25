@@ -9,6 +9,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        // MARK: Assembly modules
+
         let appState = AppState()
         let weatherReducer = WeatherReducer(
             appState: appState,
@@ -16,47 +18,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             locationManager: LocationManager()
         )
 
-        let mainView = MainView()
-            .environment(\.weatherReducer, weatherReducer)
-            .environmentObject(appState)
-            .environment(\.colorScheme, .light)
+        // MARK: Old degign
 
-        let vkuiMainView = VKUIMainView()
+        let oldMainView = MainView()
             .environment(\.weatherReducer, weatherReducer)
             .environmentObject(appState)
             .environment(\.colorScheme, .light)
 
         let forecastView = ForecastTable(appState: appState, weatherReducer: weatherReducer)
 
-        let myMain = UIHostingController(rootView: mainView)
-        myMain.tabBarItem.title = "Main"
-        myMain.tabBarItem.image = UIImage(systemName: "cloud.sun")
+        let oldMainController = UIHostingController(rootView: oldMainView)
+        oldMainController.tabBarItem.title = "Main"
+        oldMainController.tabBarItem.image = UIImage(systemName: "cloud.sun")
 
-        let vkuiMain = UIHostingController(rootView: vkuiMainView)
-        vkuiMain.tabBarItem.title = "Main"
-        vkuiMain.tabBarItem.image = UIImage(systemName: "cloud.sun")
+        let oldForecastControler = UINavigationController(rootViewController: forecastView)
+        oldForecastControler.tabBarItem.title = "Forecast"
+        oldForecastControler.tabBarItem.image = UIImage(systemName: "table")
+        oldForecastControler.navigationBar.topItem?.title = "Forecast"
+        oldForecastControler.overrideUserInterfaceStyle = .light
 
-        let vkuiUIKitMain = UINavigationController(rootViewController: MainViewController(
+        let oldTabBarController = UITabBarController()
+        oldTabBarController.setViewControllers([oldMainController, oldForecastControler], animated: true)
+        oldTabBarController.tabBar.tintColor = .blue
+        oldTabBarController.tabBar.unselectedItemTintColor = .black
+        oldTabBarController.overrideUserInterfaceStyle = .light
+
+        // MARK: SwiftUI
+
+        let SwiftUI_VKUIController = UIHostingController(rootView: VKUIMainView()
+            .environment(\.weatherReducer, weatherReducer)
+            .environmentObject(appState)
+            .environment(\.colorScheme, .light)
+        )
+
+        // MARK: UIKit
+
+        let UIKit_VKUIController = UINavigationController(rootViewController: MainViewController(
             appState: appState,
             weatherReducer: weatherReducer
         ))
 
-        let forecast = UINavigationController(rootViewController: forecastView)
-        forecast.tabBarItem.title = "Forecast"
-        forecast.tabBarItem.image = UIImage(systemName: "table")
-        forecast.navigationBar.topItem?.title = "Forecast"
-        forecast.overrideUserInterfaceStyle = .light
-
-        let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([myMain, forecast], animated: true)
-        tabBarController.tabBar.tintColor = .blue
-        tabBarController.tabBar.unselectedItemTintColor = .black
-        tabBarController.overrideUserInterfaceStyle = .light
-
         let window = UIWindow()
 
-        // Подставьте сюда контроллер на свой выбор
-        window.rootViewController = vkuiUIKitMain
+        /*
+
+         Подставьте сюда контроллер на свой выбор:
+
+         1. SwiftUI_VKUIController
+         2. UIKit_VKUIController
+         3. oldTabBarController
+
+        */
+        window.rootViewController = SwiftUI_VKUIController
 
         window.makeKeyAndVisible()
         self.window = window

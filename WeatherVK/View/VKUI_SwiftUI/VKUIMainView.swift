@@ -6,8 +6,7 @@ struct VKUIMainView: View {
 
     @State private var openSearch = false
 
-    private let mockData: [Forecast] = [.stub, .stub, .stub, .stub]
-    let randomThemeOffset = CGFloat(Int.random(in: -10...10))
+    private let mockData: [Forecast] = [.stub, .stub, .stub, .stub, .stub]
 
     var body: some View {
         ZStack {
@@ -20,15 +19,6 @@ struct VKUIMainView: View {
                             weatherType: appState.currentWeather?.type ?? .clearSky,
                             date: .now
                         )
-                            .offset(x: randomThemeOffset, y: randomThemeOffset)
-                            .frame(width: 300, height: 150)
-                            .clipShape(RoundedRectangle(cornerRadius: 25))
-                            .shadow(radius: 10, y: 10)
-
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(.white)
-                            .frame(width: 100, height: 80)
-                            .opacity(0.3)
 
                         Text("\(appState.currentWeather?.temperature ?? 0)°")
                             .font(.system(size: 60))

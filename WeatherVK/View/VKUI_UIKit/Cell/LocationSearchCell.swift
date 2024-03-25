@@ -1,9 +1,9 @@
 import UIKit
 
-class LocationSearchCell: UITableViewCell {
+final class LocationSearchCell: UITableViewCell {
     static let reuseIdentifier = "LocationSearchCell"
 
-    private let vStack: UIStackView = {
+    private let vStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 2
@@ -13,14 +13,14 @@ class LocationSearchCell: UITableViewCell {
         return stackView
     }()
 
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17)
         label.numberOfLines = 1
         return label
     }()
 
-    let infoLabel: UILabel = {
+    private let infoLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
         label.textColor = .systemGray
@@ -38,15 +38,15 @@ class LocationSearchCell: UITableViewCell {
     }
 
     private func configureCell() {
-        addSubview(vStack)
-        vStack.addArrangedSubview(titleLabel)
-        vStack.addArrangedSubview(infoLabel)
+        addSubview(vStackView)
+        vStackView.addArrangedSubview(titleLabel)
+        vStackView.addArrangedSubview(infoLabel)
         let selectedView = UIView()
         selectedBackgroundView = selectedView
 
         NSLayoutConstraint.activate([
-            vStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-            vStack.centerYAnchor.constraint(equalTo: centerYAnchor)
+            vStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            vStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }

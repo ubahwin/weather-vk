@@ -1,6 +1,6 @@
 import UIKit
 
-class DetailInfoView: UIView {
+final class DetailInfoView: UIView {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -8,7 +8,7 @@ class DetailInfoView: UIView {
         return imageView
     }()
 
-    private let VStack: UIStackView = {
+    private let vStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 2
@@ -43,9 +43,9 @@ class DetailInfoView: UIView {
 
     private func configureView() {
         addSubview(imageView)
-        addSubview(VStack)
-        VStack.addArrangedSubview(titleLabel)
-        VStack.addArrangedSubview(infoLabel)
+        addSubview(vStackView)
+        vStackView.addArrangedSubview(titleLabel)
+        vStackView.addArrangedSubview(infoLabel)
 
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -53,8 +53,8 @@ class DetailInfoView: UIView {
             imageView.heightAnchor.constraint(equalToConstant: 24),
             imageView.widthAnchor.constraint(equalToConstant: 24),
 
-            VStack.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16),
-            VStack.centerYAnchor.constraint(equalTo: centerYAnchor)
+            vStackView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16),
+            vStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }

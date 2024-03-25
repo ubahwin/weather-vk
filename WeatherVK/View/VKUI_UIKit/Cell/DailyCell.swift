@@ -1,9 +1,9 @@
 import UIKit
 
-class DailyCell: UICollectionViewCell {
+final class DailyCell: UICollectionViewCell {
     static let reuseIdentifier = "DailyCell"
 
-    private var VStack: UIStackView = {
+    private var vStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 4
@@ -13,7 +13,7 @@ class DailyCell: UICollectionViewCell {
         return stackView
     }()
 
-    private var HStack: UIStackView = {
+    private var hStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 24
@@ -23,14 +23,14 @@ class DailyCell: UICollectionViewCell {
         return stackView
     }()
 
-    let dayWeekLabel: UILabel = {
+    private let dayWeekLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    let dateLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
         label.textColor = .gray
@@ -38,7 +38,7 @@ class DailyCell: UICollectionViewCell {
         return label
     }()
 
-    let minTemperatureLabel: UILabel = {
+    private let minTemperatureLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.textColor = .gray
@@ -46,7 +46,7 @@ class DailyCell: UICollectionViewCell {
         return label
     }()
 
-    let maxTemperatureLabel: UILabel = {
+    private let maxTemperatureLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.textColor = .black
@@ -64,22 +64,22 @@ class DailyCell: UICollectionViewCell {
     }
 
     private func configureCell() {
-        addSubview(VStack)
-        addSubview(HStack)
-        VStack.addArrangedSubview(dayWeekLabel)
-        VStack.addArrangedSubview(dateLabel)
-        HStack.addArrangedSubview(maxTemperatureLabel)
-        HStack.addArrangedSubview(minTemperatureLabel)
+        addSubview(vStackView)
+        addSubview(hStackView)
+        vStackView.addArrangedSubview(dayWeekLabel)
+        vStackView.addArrangedSubview(dateLabel)
+        hStackView.addArrangedSubview(maxTemperatureLabel)
+        hStackView.addArrangedSubview(minTemperatureLabel)
 
         NSLayoutConstraint.activate([
             minTemperatureLabel.widthAnchor.constraint(equalToConstant: 35),
             maxTemperatureLabel.widthAnchor.constraint(equalToConstant: 35),
 
-            VStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            VStack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            vStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            vStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
 
-            HStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            HStack.centerYAnchor.constraint(equalTo: centerYAnchor)
+            hStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            hStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 

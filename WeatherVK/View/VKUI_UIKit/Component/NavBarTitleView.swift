@@ -16,7 +16,7 @@ class NavBarTitleView: UIView {
         return imageView
     }()
 
-    private var HStack: UIStackView = {
+    private var hStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 4
@@ -40,15 +40,15 @@ class NavBarTitleView: UIView {
     }
 
     private func configureView() {
-        addSubview(HStack)
-        HStack.addArrangedSubview(titleLabel)
-        HStack.addArrangedSubview(chevronImageView)
+        addSubview(hStackView)
+        hStackView.addArrangedSubview(titleLabel)
+        hStackView.addArrangedSubview(chevronImageView)
 
         NSLayoutConstraint.activate([
-            HStack.centerYAnchor.constraint(equalTo: centerYAnchor),
-            HStack.centerXAnchor.constraint(equalTo: centerXAnchor),
-            HStack.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
-            HStack.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1),
+            hStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            hStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            hStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
+            hStackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1),
 
             chevronImageView.heightAnchor.constraint(equalToConstant: 18),
             chevronImageView.widthAnchor.constraint(equalToConstant: 18)

@@ -1,6 +1,6 @@
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     var appState: AppState
     var weatherReducer: WeatherReducer
     private let cancelBag = CancelBag()
@@ -47,7 +47,7 @@ class MainViewController: UIViewController {
         weatherReducer.reloadData()
     }
 
-    func setupNavTitle() {
+    private func setupNavTitle() {
         navBarTitleView.configure(title: appState.currentCity?.name ?? "Поиск...")
         navigationItem.titleView = navBarTitleView
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapNavBarTitleView))

@@ -17,6 +17,7 @@ struct ForecastCell: View {
                 .frame(width: 60)
                 .bold()
             Text("\(forecast.weather.minTemp)°")
+                .padding(.leading)
                 .bold()
                 .foregroundStyle(Color(hex: 0x76787A))
         }

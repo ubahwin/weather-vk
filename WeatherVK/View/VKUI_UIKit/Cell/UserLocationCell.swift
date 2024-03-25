@@ -1,6 +1,6 @@
 import UIKit
 
-class UserLocationCell: UITableViewCell {
+final class UserLocationCell: UITableViewCell {
     static let reuseIdentifier = "UserLocationCell"
 
     private let detailInfoView: DetailInfoView = {

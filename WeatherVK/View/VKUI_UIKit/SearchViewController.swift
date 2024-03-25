@@ -1,6 +1,6 @@
 import UIKit
 
-class CitySearchViewController: UIViewController {
+final class CitySearchViewController: UIViewController {
     var appState: AppState
     var weatherReducer: WeatherReducer
     private let cancelBag = CancelBag()

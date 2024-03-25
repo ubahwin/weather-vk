@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-class DetailCell: UICollectionViewCell {
+final class DetailCell: UICollectionViewCell {
     static let reuseIdentifier = "DetailCell"
 
     private var VStack: UIStackView = {
@@ -14,28 +14,28 @@ class DetailCell: UICollectionViewCell {
         return stackView
     }()
 
-    var windInfoView: DetailInfoView = {
+    private var windInfoView: DetailInfoView = {
         let detailInfoView = DetailInfoView()
         detailInfoView.titleLabel.text = "ветер"
         detailInfoView.imageView.image = UIImage(systemName: "wind")
         return detailInfoView
     }()
 
-    let cloudInfoView: DetailInfoView = {
+    private let cloudInfoView: DetailInfoView = {
         let detailInfoView = DetailInfoView()
         detailInfoView.titleLabel.text = "облачность"
         detailInfoView.imageView.image = UIImage(systemName: "cloud")
         return detailInfoView
     }()
 
-    let pressureInfoView: DetailInfoView = {
+    private let pressureInfoView: DetailInfoView = {
         let detailInfoView = DetailInfoView()
         detailInfoView.titleLabel.text = "давление"
         detailInfoView.imageView.image = UIImage(systemName: "tirepressure")
         return detailInfoView
     }()
 
-    let visibilityInfoView: DetailInfoView = {
+    private let visibilityInfoView: DetailInfoView = {
         let detailInfoView = DetailInfoView()
         detailInfoView.titleLabel.text = "видимость"
         detailInfoView.imageView.image = UIImage(systemName: "eye.circle")

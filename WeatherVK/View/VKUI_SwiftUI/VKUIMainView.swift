@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct VKUIMainView: View {
     @EnvironmentObject private var appState: AppState
@@ -8,22 +9,35 @@ struct VKUIMainView: View {
 
     private let mockData: [Forecast] = [.stub, .stub, .stub, .stub, .stub]
 
+    private let themeDayColors: ColorPair = ColorPair(.white, .blue)
+    private let themeNightColors: ColorPair = ColorPair(Color(hex: 0x0009c0), Color(hex: 0x040d46))
+    private let now = Date()
+
     var body: some View {
         ZStack {
-            Color(hex: 0xEBEDF0).ignoresSafeArea()
+            Color(hex: 0xebedf0).ignoresSafeArea()
 
             ScrollView {
                 VStack {
                     ZStack {
-                        Theme(
-                            weatherType: appState.currentWeather?.type ?? .clearSky,
-                            date: .now
-                        )
+                        if appState.currentWeather == nil {
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color(hex: 0xE1E3E6))
+                                .frame(width: 300, height: 150)
+                        } else {
+                            Theme(
+                                weatherType: appState.currentWeather?.type ?? .clearSky,
+                                date: now,
+                                dayColors: themeDayColors,
+                                nightColors: themeNightColors
+                            )
 
-                        Text("\(appState.currentWeather?.temperature ?? 0)°")
-                            .font(.system(size: 60))
-                            .bold()
-                            .redacted(reason: appState.currentWeather == nil ? .placeholder : .init())
+                            Text("\(appState.currentWeather?.temperature ?? 0)°")
+                                .font(.system(size: 80))
+                                .bold()
+                                .foregroundStyle(themeNightColors.calculateContrastColor())
+                                .shadow(color: Color(hex: 0x070820, alpha: now.isDaytime ? 0.1 : 1), radius: 5)
+                        }
                     }
 
                     HStack {

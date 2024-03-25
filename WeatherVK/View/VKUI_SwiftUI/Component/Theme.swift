@@ -8,12 +8,15 @@ struct Theme: View {
     let weatherType: WeatherType
     let date: Date
 
+    let dayColors: ColorPair
+    let nightColors: ColorPair
+
     var body: some View {
         ZStack {
             LinearGradient(
                 gradient: .init(colors: [
-                    .white,
-                    date.isDaytime ? .blue : .black
+                    date.isDaytime ? dayColors.first : nightColors.first,
+                    date.isDaytime ? dayColors.second : nightColors.second
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
@@ -108,5 +111,10 @@ struct Theme: View {
 }
 
 #Preview {
-    Theme(weatherType: .clearSky, date: .now)
+    Theme(
+        weatherType: .clearSky,
+        date: .now,
+        dayColors: ColorPair(.white, .blue),
+        nightColors: ColorPair(.white, Color(hex: 0x050921))
+    )
 }

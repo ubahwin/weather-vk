@@ -18,6 +18,7 @@ struct Mapper {
     static func forecastResponseToDirtyModel(_ forecastResponse: GetWeatherForecast200Response) -> DirtyForecast {
         let weatherList = forecastResponse.list?.compactMap { forecastResponse in
             return DirtyWeather(
+                type: WeatherType(rawValue: (forecastResponse.weather?.first?.main)!) ?? .clearSky,
                 timestamp: TimeInterval(forecastResponse.dt ?? 0),
                 minTemp: Int(forecastResponse.main?.tempMin ?? 0),
                 maxTemp: Int(forecastResponse.main?.tempMax ?? 0),

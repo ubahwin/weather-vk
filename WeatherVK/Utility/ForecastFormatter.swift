@@ -44,9 +44,10 @@ class ForecastFormatter {
 
         let windSpeed = list.reduce(0) { $0 + ($1.windSpeed) } / Double(list.count)
         let clouds = list.reduce(0) { $0 + ($1.clouds) } / list.count
+        let type = mostCommonWeatherType(list.map { $0.type })
 
         return Weather(
-            type: .clearSky,
+            type: type,
             temperature: 0,
             minTemp: minTemp,
             maxTemp: maxTemp,
@@ -56,6 +57,28 @@ class ForecastFormatter {
             pressure: 0,
             visibility: 0
         )
+    }
+
+    func mostCommonWeatherType(_ weatherTypes: [WeatherType]) -> WeatherType {
+        var dict = [WeatherType: Int]()
+
+        for weatherType in weatherTypes {
+            if dict[weatherType] != nil {
+                dict[weatherType]! += 1
+            } else {
+                dict[weatherType] = 1
+            }
+        }
+
+        var maxCount = 0
+        var curType: WeatherType = weatherTypes.first!
+
+        for (type, count) in dict where count > maxCount {
+            maxCount = count
+            curType = type
+        }
+
+        return curType
     }
 }
 
@@ -70,11 +93,28 @@ extension Date {
     var title: String {
         Date.dateFormatter.dateFormat = "dd MMMM"
         Date.dateFormatter.locale = Locale(identifier: "ru_RU")
-        return Date.dateFormatter.string(from: self).lowercased()
+
+        var title = Date.dateFormatter.string(from: self).lowercased()
+
+        if self.isToday() {
+            title += ", сегодня"
+        }
+
+        return title
     }
 
     var isDaytime: Bool {
         let hour = Calendar.current.component(.hour, from: self)
         return hour >= 6 && hour < 21
+    }
+
+    func isSameDay(with: Date) -> Bool {
+        let cur = Calendar.current.dateComponents([.day, .month, .year], from: self)
+        let now = Calendar.current.dateComponents([.day, .month, .year], from: with)
+        return cur == now
+    }
+
+    func isToday() -> Bool {
+        isSameDay(with: Date.now)
     }
 }

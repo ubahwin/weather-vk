@@ -10,13 +10,16 @@ protocol ILocationManager {
 }
 
 final class LocationManager: NSObject, CLLocationManagerDelegate, ILocationManager {
+    private let locationManager = CLLocationManager()
+    private let geocoder = CLGeocoder()
+
     let cityName = CurrentValueSubject<String, Never>("")
     let userLocation = CurrentValueSubject<CLLocationCoordinate2D, Never>(CLLocationCoordinate2D())
 
     let phoneRotateDegrees = CurrentValueSubject<Double, Never>(0)
 
-    private let locationManager = CLLocationManager()
-    private let geocoder = CLGeocoder()
+    private var userLocationDetect = false
+    private var userCityName: String?
 
     private let searchRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(),
@@ -32,7 +35,11 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ILocationManag
     }
 
     func loadCurrentCity() -> AnyPublisher<City, Never> {
-        cityName.zip(userLocation)
+        if userLocationDetect {
+            getCityName(from: userLocation.value)
+        }
+
+        return Publishers.CombineLatest(cityName, userLocation)
             .map { name, location in
                 return City(name: name, coordinates: location)
             }
@@ -82,6 +89,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ILocationManag
         userLocation.send(coordinate)
         getCityName(from: coordinate)
 
+        userLocationDetect = true
         locationManager.stopUpdatingLocation()
     }
 

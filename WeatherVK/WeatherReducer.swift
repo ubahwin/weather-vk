@@ -7,7 +7,10 @@ protocol IWeatherReducer {
     func reloadData()
     func loadCity(from search: String)
 
-    func sinkToData(_ reloadData: @escaping () -> Void)
+    func loadCurrentCity()
+
+    func sinkToAllData(_ completion: @escaping () -> Void)
+    func sinkToForecast(_ reloadData: @escaping () -> Void)
 }
 
 struct WeatherReducer: IWeatherReducer {
@@ -30,6 +33,32 @@ struct WeatherReducer: IWeatherReducer {
 
         _ = loadCity()
         observingPhoneRotate()
+    }
+
+    func sinkToAllData(_ completion: @escaping () -> Void) {
+        appState.$forecast
+            .sink { _ in
+                completion()
+            }
+            .store(in: cancelBag)
+
+        appState.$currentCity
+            .sink { _ in
+                completion()
+            }
+            .store(in: cancelBag)
+
+        appState.$currentWeather
+            .sink { _ in
+                completion()
+            }
+            .store(in: cancelBag)
+    }
+
+    func loadCurrentCity() {
+        appState.currentCity = nil
+
+        _ = loadCity()
     }
 
     func loadCity(from search: String) {
@@ -76,6 +105,7 @@ struct WeatherReducer: IWeatherReducer {
 
         return locationManager.loadCurrentCity()
             .map { city in
+                print(city)
                 appState.currentCity = city
             }
             .eraseToAnyPublisher()
@@ -108,7 +138,7 @@ struct WeatherReducer: IWeatherReducer {
             .store(in: cancelBag)
     }
 
-    func sinkToData(_ reloadData: @escaping () -> Void) {
+    func sinkToForecast(_ reloadData: @escaping () -> Void) {
         appState.$forecast
             .sink { _ in
                 reloadData()

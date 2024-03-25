@@ -159,8 +159,8 @@ ln -s ../../git_hooks/pre-commit
 `SwiftUI`.
 
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 24px; row-gap: 20px;">
-  <img src="img/1.png" alt="Главное меню" style="width:200px;">
-  <img src="img/2.png" alt="Таблица прогноза погоды" style="width:200px;">
+  <img src="img/10.jpg" alt="Главное меню" style="width:200px;">
+  <img src="img/11.jpg" alt="Таблица прогноза погоды" style="width:200px;">
 </div>
 
 ## Технологии и инструменты

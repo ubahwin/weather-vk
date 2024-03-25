@@ -13,6 +13,7 @@ struct SearchView: View {
             VStack {
                 ZStack {
                     Text("Регион")
+                        .bold()
 
                     HStack {
                         Spacer()

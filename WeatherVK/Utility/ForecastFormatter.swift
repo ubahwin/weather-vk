@@ -1,6 +1,10 @@
 import Foundation
 
-class ForecastFormatter {
+protocol IForecastFormatter {
+    func clean(dirtyForecast: DirtyForecast) -> [Forecast]
+}
+
+class ForecastFormatter: IForecastFormatter {
     func clean(dirtyForecast: DirtyForecast) -> [Forecast] {
         let list = dirtyForecast.weatherList
 

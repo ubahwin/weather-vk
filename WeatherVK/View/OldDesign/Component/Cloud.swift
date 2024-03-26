@@ -58,7 +58,7 @@ struct Cloud<Content: View>: View {
                 self.rectanglePosition = CGSize(width: roll * moveRetio, height: pitch * moveRetio)
             }
         } else {
-            print("Device motion is not available")
+            Log.info("Device motion is not available")
         }
     }
 }

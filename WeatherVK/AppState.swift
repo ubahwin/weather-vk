@@ -6,7 +6,7 @@ class AppState: ObservableObject {
     @Published var currentCity: City?
     @Published var forecast: [Forecast]?
 
-    @Published var phoneRotateDegrees: Double = 0
-
     @Published var cityList: [City] = []
+
+    @Published var phoneRotateDegrees: Double = 0
 }

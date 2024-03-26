@@ -88,7 +88,6 @@ final class CitySearchViewController: UIViewController {
     }
 
     @objc func searchFieldDidFinishEditing() {
-        print("jjn7")
         weatherReducer.loadCity(from: searchController.searchBar.text ?? "")
     }
 }

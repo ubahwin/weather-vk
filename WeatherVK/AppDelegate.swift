@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let weatherReducer = WeatherReducer(
             appState: appState,
             weatherWebRepository: OpenWeatherWebRepository(),
-            locationManager: LocationManager()
+            locationManager: LocationManager(),
+            forecastFormatter: ForecastFormatter()
         )
 
         // MARK: Old degign

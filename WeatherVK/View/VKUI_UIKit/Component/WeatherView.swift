@@ -14,7 +14,8 @@ class WeatherView: UIView {
 
     private func configureView() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .white
+        collectionView.backgroundColor = UIColor(hex: 0xebedf0)
+        backgroundColor = UIColor(hex: 0xebedf0)
         addSubview(collectionView)
 
         NSLayoutConstraint.activate([

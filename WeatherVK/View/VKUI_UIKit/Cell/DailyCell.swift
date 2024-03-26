@@ -25,7 +25,6 @@ final class DailyCell: UICollectionViewCell {
 
     private let dayWeekLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -40,7 +39,7 @@ final class DailyCell: UICollectionViewCell {
 
     private let minTemperatureLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
+        label.font = .boldSystemFont(ofSize: 17)
         label.textColor = .gray
         label.textAlignment = .right
         return label
@@ -48,8 +47,14 @@ final class DailyCell: UICollectionViewCell {
 
     private let maxTemperatureLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
+        label.font = .boldSystemFont(ofSize: 17)
         label.textColor = .black
+        label.textAlignment = .right
+        return label
+    }()
+
+    private let weatherTypeLabel: UILabel = {
+        let label = UILabel()
         label.textAlignment = .right
         return label
     }()
@@ -68,6 +73,7 @@ final class DailyCell: UICollectionViewCell {
         addSubview(hStackView)
         vStackView.addArrangedSubview(dayWeekLabel)
         vStackView.addArrangedSubview(dateLabel)
+        hStackView.addArrangedSubview(weatherTypeLabel)
         hStackView.addArrangedSubview(maxTemperatureLabel)
         hStackView.addArrangedSubview(minTemperatureLabel)
 
@@ -89,5 +95,6 @@ final class DailyCell: UICollectionViewCell {
         dateLabel.text = forecast?.date.title
         maxTemperatureLabel.text = "\(forecast?.weather.maxTemp.description ?? "")°"
         minTemperatureLabel.text = "\(forecast?.weather.minTemp.description ?? "")°"
+        weatherTypeLabel.text = forecast?.weather.type.image
     }
 }

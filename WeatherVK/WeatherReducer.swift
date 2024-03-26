@@ -6,7 +6,6 @@ protocol IWeatherReducer {
     func loadForecast()
     func reloadData()
     func loadCity(from search: String)
-
     func loadCurrentCity()
 
     func sinkToAllData(_ completion: @escaping () -> Void)
@@ -17,42 +16,36 @@ struct WeatherReducer: IWeatherReducer {
     private let appState: AppState
     private let weatherWebRepository: IWeatherWebRepository
     private let locationManager: ILocationManager
-
-    private let forecastFormatter = ForecastFormatter()
+    private let forecastFormatter: IForecastFormatter
 
     private let cancelBag = CancelBag()
 
     init(
         appState: AppState,
         weatherWebRepository: IWeatherWebRepository,
-        locationManager: ILocationManager
+        locationManager: ILocationManager,
+        forecastFormatter: IForecastFormatter
     ) {
         self.appState = appState
         self.weatherWebRepository = weatherWebRepository
         self.locationManager = locationManager
+        self.forecastFormatter = forecastFormatter
 
         _ = loadCity()
         observingPhoneRotate()
     }
 
+    // Sink for UIKit data flow
     func sinkToAllData(_ completion: @escaping () -> Void) {
-        appState.$forecast
-            .sink { _ in
-                completion()
-            }
-            .store(in: cancelBag)
-
-        appState.$currentCity
-            .sink { _ in
-                completion()
-            }
-            .store(in: cancelBag)
-
-        appState.$currentWeather
-            .sink { _ in
-                completion()
-            }
-            .store(in: cancelBag)
+        Publishers.CombineLatest3(
+            appState.$forecast,
+            appState.$currentCity,
+            appState.$currentWeather
+        )
+        .sink { _, _, _ in
+            completion()
+        }
+        .store(in: cancelBag)
     }
 
     func loadCurrentCity() {
@@ -105,7 +98,6 @@ struct WeatherReducer: IWeatherReducer {
 
         return locationManager.loadCurrentCity()
             .map { city in
-                print(city)
                 appState.currentCity = city
             }
             .eraseToAnyPublisher()
@@ -123,6 +115,7 @@ struct WeatherReducer: IWeatherReducer {
             .store(in: cancelBag)
     }
 
+    // Load forecast -> Clean -> Error handle -> Forecast > AppState
     private func loadForecast(from coordinates: CLLocationCoordinate2D) {
         weatherWebRepository.loadForecast(coordinates: coordinates)
             .map { dirtyForecast in
@@ -157,7 +150,8 @@ struct WeatherReducer: IWeatherReducer {
         WeatherReducer(
             appState: AppState(),
             weatherWebRepository: StubWeatherWebRepository(),
-            locationManager: LocationManager()
+            locationManager: LocationManager(),
+            forecastFormatter: ForecastFormatter()
         )
     }
 }

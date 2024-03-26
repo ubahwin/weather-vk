@@ -3,11 +3,11 @@ import CoreMotion
 
 struct Theme: View {
     let motionManager = CMMotionManager()
-    @State private var offset = CGSize()
 
     let weatherType: WeatherType
-
     let colors: ColorPair
+
+    @State private var offset = CGSize()
 
     var body: some View {
         ZStack {
@@ -103,7 +103,7 @@ struct Theme: View {
                 self.offset = CGSize(width: roll * 8, height: pitch * 8)
             }
         } else {
-            print("Device motion is not available")
+            Log.info("Device motion is not available")
         }
     }
 }

@@ -11,7 +11,7 @@ extension UIDevice {
             .flatMap { $0.windows }
             .first { $0.isKeyWindow}
         ) else {
-            print("UIDevice: do not found key window")
+            Log.info("UIDevice: do not found key window")
             return false
         }
         return window.safeAreaInsets.top >= 51

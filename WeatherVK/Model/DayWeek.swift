@@ -30,9 +30,7 @@ enum DayWeek: Int {
         case .saturday: "Saturday"
         }
     }
-}
 
-extension DayWeek {
     var isWeekend: Bool {
         self == .saturday || self == .sunday
     }
